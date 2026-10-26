@@ -168,3 +168,11 @@ poetry.lock
 
 # Upstream sample model weights (training artifacts, not code)
 *.pth
+
+# Exception: keep upstream documentation / README images tracked.
+# The broad *.png rule above targets run-artifact screenshots in the root;
+# docs/source/image/ and figs/ are part of the upstream docs and must be kept.
+!docs/source/image/*.png
+!docs/source/image/*.PNG
+!figs/*.png
+!figs/*.PNG
