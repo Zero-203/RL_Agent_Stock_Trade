@@ -1,14 +1,10 @@
-FROM ubuntu:22.04
+FROM python:3.9-slim-bookworm
 
 ENV DEBIAN_FRONTEND=noninteractive \
     PIP_DISABLE_PIP_VERSION_CHECK=1
 
-# Python 3.10 + pip, plus build tools needed by swig, TA-Lib, box2d, etc.
+# Build tools needed by swig, TA-Lib, box2d, etc.
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        python3 \
-        python3-pip \
-        python3-dev \
-        python-is-python3 \
         build-essential \
         git \
         wget \
@@ -33,10 +29,10 @@ WORKDIR /src
 
 COPY requirements.txt .
 
-RUN python3 -m pip install --upgrade pip setuptools wheel \
-    && python3 -m pip install -r requirements.txt -I
+RUN python -m pip install --upgrade pip setuptools wheel \
+    && python -m pip install -r requirements.txt -I
 
-RUN python3 -m pip install jupyterlab
+RUN python -m pip install jupyterlab
 
 # Add Tini. Tini operates as a process subreaper for jupyter. This prevents kernel crashes.
 ENV TINI_VERSION v0.6.0
