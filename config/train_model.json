@@ -1,0 +1,64 @@
+{
+  "data": {
+    "root_dir": "datasets",
+    "train_file": "train_data.csv",
+    "val_file": "val_data.csv",
+    "test_file": "trade_data.csv"
+  },
+  "environment": {
+    "hmax": 100,
+    "initial_amount": 1000000,
+    "buy_cost_pct": 0.001,
+    "sell_cost_pct": 0.001,
+    "reward_scaling": 0.0001,
+    "tech_indicator_list": [
+      "macd",
+      "boll_ub",
+      "boll_lb",
+      "rsi_30",
+      "cci_30",
+      "dx_30",
+      "close_30_sma",
+      "close_60_sma"
+    ],
+    "risk_indicator_col": "turbulence",
+    "turbulence_threshold": null
+  },
+  "training": {
+    "total_timesteps": 20000,
+    "policy": "MlpPolicy",
+    "device": "auto",
+    "verbose": 1,
+    "logger_formats": ["stdout", "csv", "tensorboard"]
+  },
+  "algorithms": {
+    "ppo": {
+      "n_steps": 2048,
+      "ent_coef": 0.01,
+      "learning_rate": 0.00025,
+      "batch_size": 64
+    },
+    "ddpg": {
+      "batch_size": 128,
+      "buffer_size": 50000,
+      "learning_rate": 0.001
+    },
+    "td3": {
+      "batch_size": 100,
+      "buffer_size": 1000000,
+      "learning_rate": 0.001
+    },
+    "sac": {
+      "batch_size": 64,
+      "buffer_size": 100000,
+      "learning_rate": 0.0001,
+      "learning_starts": 100,
+      "ent_coef": "auto_0.1"
+    }
+  },
+  "output": {
+    "trained_models_dir": "trained_models",
+    "tensorboard_log_dir": "tensorboard_log",
+    "results_dir": "results/train_model"
+  }
+}
