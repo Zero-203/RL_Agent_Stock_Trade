@@ -160,6 +160,9 @@ trained_models/
 tensorboard_log/
 datasets/
 
+# Local-only test code and notes
+local_test/
+
 # final_deliverables/ is intentionally NOT ignored:
 # it is committed once at final delivery (one-shot, no incremental tracking).
 
@@ -176,3 +179,4 @@ poetry.lock
 !docs/source/image/*.PNG
 !figs/*.png
 !figs/*.PNG
+/.github/copilot-instructions.md
