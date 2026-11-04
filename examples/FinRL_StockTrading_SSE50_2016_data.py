@@ -3,6 +3,7 @@
 import argparse
 import json
 import os
+import re
 import sys
 import time
 from datetime import datetime, timedelta, timezone
@@ -26,7 +27,20 @@ def load_config(path=CONFIG_PATH):
         raise ValueError("Invalid request or retry delay")
     if config["max_attempts"] < 1:
         raise ValueError("max_attempts must be at least one")
+    yahoo_tickers(config)
     return config
+
+
+def yahoo_tickers(config):
+    codes = config["baostock_supplement"]["codes"]
+    if len(codes) != 2 or len(set(codes)) != 2 or any(
+        not re.fullmatch(r"sh\.\d{6}", code) for code in codes
+    ):
+        raise ValueError("BaoStock supplement must contain two distinct Shanghai codes")
+    excluded = {code[3:] + ".SS" for code in codes}
+    if not excluded.issubset(config["tickers"]):
+        raise ValueError("BaoStock supplement codes must belong to the frozen pool")
+    return [ticker for ticker in config["tickers"] if ticker not in excluded]
 
 
 def fetch_ticker(ticker, config, end_date):
@@ -55,7 +69,9 @@ def fetch_ticker(ticker, config, end_date):
             time.sleep(delay)
 
 
-def download(tickers, config, end_date):
+def download(tickers, config, end_date, save_combined=False):
+    if save_combined and tickers != yahoo_tickers(config):
+        raise ValueError("Combined output requires the complete Yahoo pool")
     output_dir = ROOT / config["output_directory"]
     output_dir.mkdir(parents=True, exist_ok=True)
     frames = []
@@ -67,9 +83,9 @@ def download(tickers, config, end_date):
         data.to_csv(output_dir / f"{ticker}.csv", index=False)
         frames.append(data)
         print(f"{ticker}: {len(data)} rows", flush=True)
-    if len(tickers) == 50:
+    if save_combined:
         combined = pd.concat(frames, ignore_index=True)
-        path = output_dir / "sse50_2016_raw.csv"
+        path = output_dir / "sse50_2016_yahoo48_raw.csv"
         combined.to_csv(path, index=False)
         print(f"Saved {len(combined)} rows to {path}", flush=True)
 
@@ -77,18 +93,19 @@ def download(tickers, config, end_date):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     selection = parser.add_mutually_exclusive_group(required=True)
-    selection.add_argument("--ticker", help="Download a single ticker from the frozen pool")
-    selection.add_argument("--all", action="store_true", help="Download the entire frozen pool")
+    selection.add_argument("--ticker", help="Download a single ticker from the Yahoo pool")
+    selection.add_argument("--all", action="store_true", help="Download the 48-ticker Yahoo pool")
     args = parser.parse_args()
     config = load_config()
-    if args.ticker and args.ticker not in config["tickers"]:
-        parser.error("--ticker must belong to the frozen pool")
+    selected_tickers = yahoo_tickers(config)
+    if args.ticker and args.ticker not in selected_tickers:
+        parser.error("--ticker must belong to the Yahoo pool; use BaoStock for the two excluded tickers")
     proxy = os.getenv("PROXY_SERVER")
     if proxy:
         yf.set_config(proxy=proxy)
     end_date = (datetime.now(timezone(timedelta(hours=8))).date() + timedelta(days=1)).isoformat()
     try:
-        download(config["tickers"] if args.all else [args.ticker], config, end_date)
+        download(selected_tickers if args.all else [args.ticker], config, end_date, save_combined=args.all)
     except Exception as error:
         print(f"Download stopped: {error}", file=sys.stderr)
         if error.__cause__:
