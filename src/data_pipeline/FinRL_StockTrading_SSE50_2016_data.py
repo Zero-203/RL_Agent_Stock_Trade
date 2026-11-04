@@ -13,7 +13,7 @@ import pandas as pd
 import yfinance as yf
 
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 CONFIG_PATH = ROOT / "config" / "sse50_2016.json"
 
 

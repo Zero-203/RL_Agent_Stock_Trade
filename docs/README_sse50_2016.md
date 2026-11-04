@@ -2,14 +2,14 @@
 
 ## 股票池和获取方式
 
-股票池固定为 2016-01-04 的上证50成分，具体代码、名称、数据来源及核验限制见 [成分股名单](sse50_constituents_2016.md)。其中 48 只由 Yahoo 获取，`600837` 和 `601989` 由 BaoStock 单独获取；两种数据源不拼接。Yahoo 的 `.SS` 后缀对应上海证券交易所，退市、合并、更名、停牌或数据源缺失可能影响数据覆盖。
+股票池固定为 2016-01-04 的上证50成分，具体代码、名称、数据来源及核验限制见 [冻结股票池来源及成分名单](#冻结股票池来源及成分名单)。其中 48 只由 Yahoo 获取，`600837` 和 `601989` 由 BaoStock 单独获取；两种数据源不拼接。Yahoo 的 `.SS` 后缀对应上海证券交易所，退市、合并、更名、停牌或数据源缺失可能影响数据覆盖。
 
 在项目根目录运行：
 
 ```powershell
-python examples/FinRL_StockTrading_SSE50_2016_data.py --ticker 600000.SS
-python examples/FinRL_StockTrading_SSE50_2016_data.py --all
-python examples/FinRL_StockTrading_SSE50_2016_baostock.py
+python src/data_pipeline/FinRL_StockTrading_SSE50_2016_data.py --ticker 600000.SS
+python src/data_pipeline/FinRL_StockTrading_SSE50_2016_data.py --all
+python src/data_pipeline/FinRL_StockTrading_SSE50_2016_baostock.py
 ```
 
 依赖 `pandas` 和 `yfinance`，项目已将其列入 `requirements.txt`；BaoStock 脚本还需按下文安装 `baostock==0.9.4`。股票池、BaoStock 补充代码、起始日、请求间隔和重试次数在 `config/sse50_2016.json` 中配置。Yahoo 脚本从冻结的 50 只中排除配置的两只 BaoStock 股票，`--ticker` 只接受其余 48 只；可通过环境变量 `PROXY_SERVER` 指定代理。Yahoo 默认从 2016-01-01（含）开始，结束参数为运行时的上海日期的次日（不含），因此可包含运行当日已有的行情，盘中当日数据可能尚未完整。
@@ -47,7 +47,7 @@ python examples/FinRL_StockTrading_SSE50_2016_baostock.py
 
 ```powershell
 python -m pip install baostock==0.9.4
-python examples/FinRL_StockTrading_SSE50_2016_baostock.py
+python src/data_pipeline/FinRL_StockTrading_SSE50_2016_baostock.py
 ```
 
 补充标的、`adjustflag` 和输出目录在 `config/sse50_2016.json` 的 `baostock_supplement` 中配置。脚本使用 BaoStock 日线，起始日期为 `start_date`，结束日期为运行时的上海日期（含）。结果保存在 Git 忽略的独立目录：
@@ -100,3 +100,64 @@ CSV 原样保存接口返回的 `date,code,open,high,low,close,preclose,volume,a
 | `turbulence` | FinRL 根据股票收益率、前 252 个交易日的均值和协方差计算的市场动荡指标，初始阶段置零。 |
 
 技术指标计算细节由安装的 `stockstats` 版本决定。原脚本未启用 `user_defined_feature`，因此不会生成该选项对应的 `daily_return`。若后续要将本 CSV 用作 FinRL 输入，需先明确字段映射、复权、缺失数据政策、适合中国市场的风险指标和时间划分，再单独执行特征工程；不能直接把当前 CSV 当作原脚本的处理结果。
+
+## 冻结股票池来源及成分名单
+
+冻结时点为 2016 年首个交易日 **2016-01-04**，此后不随指数调样改变。
+
+- [BaoStock](https://www.baostock.com/) 0.9.4：调用 `query_sz50_stocks(date="2016-01-04")`，返回 50 个不同的 `sh.` 代码。以下名称是查询接口返回的名称，可能使用了较新的简称，并非保证为 2016 年历史简称。
+- [天天基金华夏上证50 ETF 2015 年持仓](https://fundf10.eastmoney.com/FundArchivesDatas.aspx?type=jjcc&code=510050&topline=100&year=2015) 与 [博时上证50 ETF 2015 年持仓](https://fundf10.eastmoney.com/FundArchivesDatas.aspx?type=jjcc&code=510710&topline=100&year=2015)：两基金在 2015-12-31 均持有相同 51 只股票，覆盖下列 50 只；额外的 600690 是基金持仓，不能仅凭持仓将其认作指数成分。该交叉核对不是指数官方历史名单。
+- [Yahoo Finance 交易所后缀说明](https://help.yahoo.com/kb/SLN2310.html)：上海证券交易所使用 `.SS`。以下 Yahoo 代码由证券代码加后缀得到；这只核实了映射规则，不代表 Yahoo 已验证每只股票的历史行情或覆盖范围。股票更名、退市等可能影响可用性。
+
+| 证券代码 | BaoStock 返回名称 | Yahoo 代码 |
+| --- | --- | --- |
+| 600000 | 浦发银行 | 600000.SS |
+| 600010 | 包钢股份 | 600010.SS |
+| 600015 | 华夏银行 | 600015.SS |
+| 600016 | 民生银行 | 600016.SS |
+| 600018 | 上港集团 | 600018.SS |
+| 600028 | 中国石化 | 600028.SS |
+| 600030 | 中信证券 | 600030.SS |
+| 600036 | 招商银行 | 600036.SS |
+| 600048 | 保利地产 | 600048.SS |
+| 600050 | 中国联通 | 600050.SS |
+| 600104 | 上汽集团 | 600104.SS |
+| 600109 | 国金证券 | 600109.SS |
+| 600111 | 北方稀土 | 600111.SS |
+| 600150 | *ST船舶 | 600150.SS |
+| 600518 | 康美药业 | 600518.SS |
+| 600519 | 贵州茅台 | 600519.SS |
+| 600585 | 海螺水泥 | 600585.SS |
+| 600637 | 东方明珠 | 600637.SS |
+| 600795 | 国电电力 | 600795.SS |
+| 600837 | 海通证券 | 600837.SS |
+| 600887 | 伊利股份 | 600887.SS |
+| 600893 | 航发动力 | 600893.SS |
+| 600958 | 东方证券 | 600958.SS |
+| 600999 | 招商证券 | 600999.SS |
+| 601006 | 大秦铁路 | 601006.SS |
+| 601088 | 中国神华 | 601088.SS |
+| 601166 | 兴业银行 | 601166.SS |
+| 601169 | 北京银行 | 601169.SS |
+| 601186 | 中国铁建 | 601186.SS |
+| 601211 | 国泰君安 | 601211.SS |
+| 601288 | 农业银行 | 601288.SS |
+| 601318 | 中国平安 | 601318.SS |
+| 601328 | 交通银行 | 601328.SS |
+| 601336 | 新华保险 | 601336.SS |
+| 601390 | 中国中铁 | 601390.SS |
+| 601398 | 工商银行 | 601398.SS |
+| 601601 | 中国太保 | 601601.SS |
+| 601628 | 中国人寿 | 601628.SS |
+| 601668 | 中国建筑 | 601668.SS |
+| 601669 | 中国电建 | 601669.SS |
+| 601688 | 华泰证券 | 601688.SS |
+| 601766 | 中国中车 | 601766.SS |
+| 601800 | 中国交建 | 601800.SS |
+| 601818 | 光大银行 | 601818.SS |
+| 601857 | 中国石油 | 601857.SS |
+| 601901 | 方正证券 | 601901.SS |
+| 601985 | 中国核电 | 601985.SS |
+| 601988 | 中国银行 | 601988.SS |
+| 601989 | 中国重工 | 601989.SS |
+| 601998 | 中信银行 | 601998.SS |

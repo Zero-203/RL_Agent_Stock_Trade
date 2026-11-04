@@ -10,7 +10,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 CONFIG_PATH = ROOT / "config" / "sse50_2016.json"
 FIELDS = "date,code,open,high,low,close,preclose,volume,amount,adjustflag,turn,tradestatus,pctChg,isST"
 
