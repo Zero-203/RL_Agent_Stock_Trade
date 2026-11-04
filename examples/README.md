@@ -30,6 +30,8 @@ python examples/FinRL_StockTrading_2026_1_data.py
 
 This script downloads DOW 30 stock data from Yahoo Finance, adds technical indicators (MACD, RSI, etc.), VIX, and turbulence index, then splits the data into training set (2014–2025) and trading set (2026-01-01 to 2026-03-20), saving them as `train_data.csv` and `trade_data.csv`.
 
+For the frozen 2016 SSE 50 raw-data downloader and its differences from this pipeline, see [SSE 50 data and indicator documentation](../docs/README_sse50_2016.md).
+
 **2. Train DRL Agents**
 
 ```bash
