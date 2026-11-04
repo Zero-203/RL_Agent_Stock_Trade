@@ -11,6 +11,10 @@
     "adjustflag": "3",
     "output_directory": "datasets/sse50_2016/baostock"
   },
+  "baostock_index": {
+    "code": "sh.000016",
+    "output_directory": "datasets/sse50_2016/baostock"
+  },
   "tickers": [
     "600000.SS", "600010.SS", "600015.SS", "600016.SS", "600018.SS",
     "600028.SS", "600030.SS", "600036.SS", "600048.SS", "600050.SS",

@@ -12,7 +12,7 @@ python src/data_pipeline/FinRL_StockTrading_SSE50_2016_data.py --all
 python src/data_pipeline/FinRL_StockTrading_SSE50_2016_baostock.py
 ```
 
-依赖 `pandas` 和 `yfinance`，项目已将其列入 `requirements.txt`；BaoStock 脚本还需按下文安装 `baostock==0.9.4`。股票池、BaoStock 补充代码、起始日、请求间隔和重试次数在 `config/sse50_2016.json` 中配置。Yahoo 脚本从冻结的 50 只中排除配置的两只 BaoStock 股票，`--ticker` 只接受其余 48 只；可通过环境变量 `PROXY_SERVER` 指定代理。Yahoo 默认从 2016-01-01（含）开始，结束参数为运行时的上海日期的次日（不含），因此可包含运行当日已有的行情，盘中当日数据可能尚未完整。
+依赖 `pandas`、`yfinance` 和 `baostock`，项目权威环境 `requirements-lock.txt` 已固定这些依赖。股票池、BaoStock 补充代码、起始日、请求间隔和重试次数在 `config/sse50_2016.json` 中配置。Yahoo 脚本从冻结的 50 只中排除配置的两只 BaoStock 股票，`--ticker` 只接受其余 48 只；可通过环境变量 `PROXY_SERVER` 指定代理。Yahoo 默认从 2016-01-01（含）开始，结束参数为运行时的上海日期的次日（不含），因此可包含运行当日已有的行情，盘中当日数据可能尚未完整。
 
 脚本串行请求，默认每只间隔 5 秒；失败最多尝试 2 次，两次之间等待 30 秒。若某只股票仍失败，脚本停止并返回非零状态；已经写出的单股 CSV 保留，不会生成本次完整汇总文件。再次运行会重新下载并覆盖已成功的单股文件，不会自动跳过已下载股票。旧汇总文件如已存在，不会因本次失败自动删除或更新，需根据运行日志确认其是否为本次结果。
 
@@ -43,10 +43,9 @@ python src/data_pipeline/FinRL_StockTrading_SSE50_2016_baostock.py
 
 ### BaoStock 独立补充文件
 
-在已安装项目依赖的环境中，按需安装单独的可选依赖并运行：
+在已按 `requirements-lock.txt` 安装依赖的项目环境中运行：
 
 ```powershell
-python -m pip install baostock==0.9.4
 python src/data_pipeline/FinRL_StockTrading_SSE50_2016_baostock.py
 ```
 
@@ -58,6 +57,18 @@ python src/data_pipeline/FinRL_StockTrading_SSE50_2016_baostock.py
 | `datasets/sse50_2016/baostock/sh.601989.csv` | 2,352 行 | 2016-01-04 至 2025-09-04；含 156 条停牌记录。 |
 
 CSV 原样保存接口返回的 `date,code,open,high,low,close,preclose,volume,amount,adjustflag,turn,tradestatus,pctChg,isST` 字段；其中 `adjustflag=3` 表示不复权，`tradestatus` 标记交易或停牌，空字段保留为空。脚本不转换为 Yahoo 列名、不计算 `Adj Close`、不补造分红和拆股列，也不合并或覆盖 Yahoo 数据。查询结果为空或明确报告分页错误时，不会替换原有对应文件；源接口不保证提供完整数据，使用前仍应核验覆盖范围。
+
+### 上证50指数日线
+
+在已安装项目锁定依赖的环境中，于项目根目录运行：
+
+```powershell
+python src/data_pipeline/FinRL_StockTrading_SSE50_2016_index.py
+```
+
+脚本使用 BaoStock 的上证50指数代码 `sh.000016`，代码和输出目录配置于 `config/sse50_2016.json` 的 `baostock_index`。查询从 `start_date`（2016-01-01，含）至运行时上海日期（含），可包含盘中尚未完整的当日行情。输出到 Git 忽略的 `datasets/sse50_2016/baostock/sh.000016.csv`，独立于股票文件。CSV 保留接口返回的 `date,code,open,high,low,close,volume,amount`，不计算指标、补值或划分数据；请求使用 `adjustflag=3`，不对指数做股票复权。查询为空或明确报告分页错误时不会覆盖已有文件。
+
+本次实际下载得到 2,630 行，日期为 2016-01-04 至 2026-11-03，代码均为 `sh.000016`，日期无重复；这不保证数据源覆盖所有交易日。上证50指数按指数规则动态调整成分，不等同于固定 2016 年股票池的组合收益，也不是上证综指或 ETF。
 
 ## 本脚本的字段
 

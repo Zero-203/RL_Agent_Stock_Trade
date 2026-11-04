@@ -15,9 +15,9 @@ CONFIG_PATH = ROOT / "config" / "sse50_2016.json"
 FIELDS = "date,code,open,high,low,close,preclose,volume,amount,adjustflag,turn,tradestatus,pctChg,isST"
 
 
-def save_history(client, code, start_date, end_date, adjustflag, output_dir):
+def save_history(client, code, start_date, end_date, adjustflag, output_dir, fields=FIELDS):
     result = client.query_history_k_data_plus(
-        code, FIELDS, start_date=start_date, end_date=end_date,
+        code, fields, start_date=start_date, end_date=end_date,
         frequency="d", adjustflag=adjustflag,
     )
     if result.error_code != "0":
