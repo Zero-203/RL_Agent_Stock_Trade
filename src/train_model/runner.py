@@ -17,34 +17,9 @@ from typing import Any
 from stable_baselines3.common.logger import configure
 
 from finrl.agents.stablebaselines3.models import DRLAgent, MODELS
-from finrl.meta.env_stock_trading.env_stocktrading import StockTradingEnv
+from trading_environment import build_environment, environment_hashes
 from train_model.config import SUPPORTED_ALGORITHMS, validate_config
 from train_model.data import load_train_val_data
-
-
-def build_environment(frame, environment_config: dict[str, Any]) -> StockTradingEnv:
-    indicators = list(environment_config["tech_indicator_list"])
-    stock_dimension = frame["tic"].nunique()
-    env_kwargs = {
-        "df": frame,
-        "hmax": int(environment_config["hmax"]),
-        "initial_amount": float(environment_config["initial_amount"]),
-        "num_stock_shares": [0] * stock_dimension,
-        "buy_cost_pct": [float(environment_config["buy_cost_pct"])] * stock_dimension,
-        "sell_cost_pct": [float(environment_config["sell_cost_pct"])] * stock_dimension,
-        "reward_scaling": float(environment_config["reward_scaling"]),
-        "state_space": 1 + 2 * stock_dimension + len(indicators) * stock_dimension,
-        "stock_dim": stock_dimension,
-        "action_space": stock_dimension,
-        "tech_indicator_list": indicators,
-        "risk_indicator_col": environment_config["risk_indicator_col"],
-        "print_verbosity": int(environment_config.get("print_verbosity", 10)),
-    }
-    if environment_config.get("turbulence_threshold") is not None:
-        env_kwargs["turbulence_threshold"] = float(
-            environment_config["turbulence_threshold"]
-        )
-    return StockTradingEnv(**env_kwargs)
 
 
 def build_model(
@@ -63,9 +38,11 @@ def build_model(
 
     params = copy.deepcopy(model_kwargs)
     params["device"] = device
+    policy_kwargs = params.pop("policy_kwargs", None)
     return DRLAgent(env=vector_environment).get_model(
         normalized_algorithm,
         policy=policy,
+        policy_kwargs=policy_kwargs,
         model_kwargs=params,
         seed=int(seed),
         tensorboard_log=str(tensorboard_log),
@@ -232,6 +209,8 @@ def run_training(
     val_path = dataset_dir / data_config["val_file"]
     test_path = dataset_dir / data_config["test_file"]
     environment_config = copy.deepcopy(config["environment"])
+    environment_config.setdefault("price_basis", "adjusted_virtual_units")
+    environment_config.setdefault("tradability_policy", "legacy_finrl")
     model_kwargs = copy.deepcopy(config["algorithms"][algorithm])
     effective_device = device or training_config.get("device", "auto")
     train_frame, val_frame = load_train_val_data(
@@ -255,7 +234,9 @@ def run_training(
     model_stem = build_model_stem(
         algorithm, int(seed), effective_timesteps, model_kwargs
     )
-    run_id = f"{model_stem}__run-{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}-{uuid.uuid4().hex[:6]}"
+    # Keep log directories bounded on Windows. Verbose model_stem remains
+    # the archive filename; its parameters are also in effective_config.
+    run_id = f"{algorithm}_s{seed}_{configuration_fingerprint}__run-{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}-{uuid.uuid4().hex[:6]}"
 
     output_config = config["output"]
     model_dir = _resolve_path(root, output_config["trained_models_dir"]) / dataset_name / algorithm
@@ -288,6 +269,18 @@ def run_training(
         },
         "data_hashes": data_hashes,
         "configuration_fingerprint": configuration_fingerprint,
+        "data_contract": {
+            "ordered_tickers": sorted(train_frame["tic"].unique().tolist()),
+            "ordered_indicators": list(environment_config["tech_indicator_list"]),
+            "price_basis": environment_config["price_basis"],
+            "execution_timing": "finrl_same_close",
+            "observation_dimension": int(1 + (2 + len(environment_config["tech_indicator_list"])) * train_frame["tic"].nunique()),
+            "action_dimension": int(train_frame["tic"].nunique()),
+            "train_end": max(train_frame["date"]),
+            "validation_start": min(val_frame["date"]),
+            "validation_end": max(val_frame["date"]),
+            "environment_code_sha256": environment_hashes(),
+        },
     }
     manifest: dict[str, Any] = {
         "run_id": run_id,
@@ -344,8 +337,9 @@ def run_training(
         if not model_path.is_file():
             raise RuntimeError(f"SB3 model archive was not created: {model_path}")
 
+        inference_kwargs = {} if algorithm == "ppo" else {"buffer_size": 1}
         reloaded_model = MODELS[algorithm].load(
-            str(model_path), device=effective_device
+            str(model_path), device=effective_device, **inference_kwargs
         )
         account_values, actions = DRLAgent.DRL_prediction(
             model=reloaded_model,
@@ -377,7 +371,7 @@ def run_training(
             "artifacts": manifest["artifacts"],
         }
         _write_archive_metadata(model_path, archive_metadata)
-        MODELS[algorithm].load(str(model_path), device=effective_device)
+        MODELS[algorithm].load(str(model_path), device=effective_device, **inference_kwargs)
         _write_json(manifest_path, manifest)
         return manifest
     except Exception as error:
