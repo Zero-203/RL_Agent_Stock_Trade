@@ -1,0 +1,17 @@
+{
+  "defaults": {
+    "data_path": "datasets/sse48_baostock_v2/trade_data.csv",
+    "benchmark_path": "datasets/sse48_baostock_v2/test_index.csv",
+    "output_root": "results/backtest",
+    "split": "test",
+    "device": "cpu",
+    "annualization": 252,
+    "risk_free_rate": 0
+  },
+  "jobs": [
+    {"model_path": "trained_models/sse48_baostock_v2/ppo/YOUR_SEED1_MODEL.zip"},
+    {"model_path": "trained_models/sse48_baostock_v2/ppo/YOUR_SEED2_MODEL.zip"},
+    {"model_path": "trained_models/sse48_baostock_v2/ppo/YOUR_SEED3_MODEL.zip"}
+  ],
+  "summary_output": "results/backtest/summary.csv"
+}

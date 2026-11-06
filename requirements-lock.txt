@@ -192,3 +192,4 @@ wsproto==1.2.0
 yarl==1.22.0
 yfinance==0.2.58
 zipp==3.23.1
+baostock==0.9.4

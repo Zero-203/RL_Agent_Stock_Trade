@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import Iterable
 
 import pandas as pd
+import numpy as np
 
 _BASE_COLUMNS = ("date", "tic", "open", "high", "low", "close", "volume", "day")
 
@@ -17,7 +18,7 @@ def load_processed_csv(
     if not csv_path.is_file():
         raise FileNotFoundError(f"CSV file not found: {csv_path}")
 
-    frame = pd.read_csv(csv_path)
+    frame = pd.read_csv(csv_path, float_precision="round_trip")
     serialized_index_columns = [
         column for column in frame.columns if str(column).startswith("Unnamed:")
     ]
@@ -36,15 +37,25 @@ def load_processed_csv(
         raise ValueError(f"CSV file is empty: {csv_path}")
 
     frame["date"] = pd.to_datetime(frame["date"], errors="raise").dt.strftime("%Y-%m-%d")
-    frame["tic"] = frame["tic"].astype(str)
+    if frame["tic"].isna().any() or frame["tic"].astype(str).str.strip().eq("").any():
+        raise ValueError(f"{csv_path} contains missing ticker values")
+    frame["tic"] = frame["tic"].astype(str).str.strip()
     if frame.duplicated(["date", "tic"]).any():
         raise ValueError(f"{csv_path} contains duplicate date/ticker rows")
 
     numeric_columns = required_columns.difference(("date", "tic"))
     for column in numeric_columns:
         frame[column] = pd.to_numeric(frame[column], errors="raise")
-    if frame[list(numeric_columns)].isna().any().any():
-        raise ValueError(f"{csv_path} contains missing numeric values")
+    finite = np.isfinite(frame[list(numeric_columns)].to_numpy(dtype=float)).all(axis=1)
+    if not finite.all():
+        raise ValueError(f"{csv_path} contains {int((~finite).sum())} rows with missing or nonfinite numeric values. Delisted rows need an explicit universe/exit policy; never silently fill prices with zero.")
+    prices = frame[["open", "high", "low", "close"]]
+    if (prices <= 0).any().any() or (frame["volume"] < 0).any():
+        raise ValueError(f"{csv_path} contains invalid prices or volume")
+    if (frame["high"] + 1e-5 < prices.max(axis=1)).any() or (frame["low"] - 1e-5 > prices.min(axis=1)).any():
+        raise ValueError(f"{csv_path} contains inconsistent OHLC ranges")
+    if not frame["day"].eq(pd.to_datetime(frame["date"]).dt.dayofweek).all():
+        raise ValueError(f"{csv_path} day column disagrees with date")
 
     frame = frame.sort_values(["date", "tic"]).reset_index(drop=True)
     ticker_sets = frame.groupby("date", sort=False)["tic"].agg(frozenset)
