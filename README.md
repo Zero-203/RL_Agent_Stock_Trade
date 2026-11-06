@@ -90,3 +90,15 @@ python examples\FinRL_StockTrading_2026_3_Backtest.py   # 回测并与基线比�
 ## 免责声明
 
 本项目为课程教学项目，仅供学习与研究使用，不构成任何投资建议。历史回测表现不代表未来收益。
+
+
+## P2 BaoStock数据与统一回测
+
+当前采用48只固定股票池和复权模拟单位。安装requirements-lock.txt后，在项目根目录运行以下命令生成本地数据。
+
+```powershell
+python scripts/prepare_sse48.py --fetch
+python scripts/backtest.py check-data --data datasets/sse48_baostock_v2/train_data.csv
+```
+
+数据准备说明见[48股BaoStock数据](docs/README_sse48_baostock_v2.md)，模型与回测接口见[统一回测](docs/README_backtest.md)。原始行情、生成CSV、模型、日志及图表存放在Git忽略目录。

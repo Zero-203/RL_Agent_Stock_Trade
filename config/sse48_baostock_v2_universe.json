@@ -1,0 +1,195 @@
+{
+  "dataset_name": "sse48_baostock_v2",
+  "version": "sse48_baostock_v2",
+  "universe_status": "confirmed_by_user",
+  "confirmation_date": "2026-11-05",
+  "source_status": "baostock_only_confirmed_by_user",
+  "source": "BaoStock",
+  "ordered_tickers": [
+    "600000.SS",
+    "600010.SS",
+    "600015.SS",
+    "600016.SS",
+    "600018.SS",
+    "600028.SS",
+    "600030.SS",
+    "600036.SS",
+    "600048.SS",
+    "600050.SS",
+    "600104.SS",
+    "600109.SS",
+    "600111.SS",
+    "600150.SS",
+    "600518.SS",
+    "600519.SS",
+    "600585.SS",
+    "600637.SS",
+    "600795.SS",
+    "600887.SS",
+    "600893.SS",
+    "600958.SS",
+    "600999.SS",
+    "601006.SS",
+    "601088.SS",
+    "601166.SS",
+    "601169.SS",
+    "601186.SS",
+    "601211.SS",
+    "601288.SS",
+    "601318.SS",
+    "601328.SS",
+    "601336.SS",
+    "601390.SS",
+    "601398.SS",
+    "601601.SS",
+    "601628.SS",
+    "601668.SS",
+    "601669.SS",
+    "601688.SS",
+    "601766.SS",
+    "601800.SS",
+    "601818.SS",
+    "601857.SS",
+    "601901.SS",
+    "601985.SS",
+    "601988.SS",
+    "601998.SS"
+  ],
+  "excluded_tickers": [
+    "600837.SS",
+    "601989.SS"
+  ],
+  "stock_count": 48,
+  "ordered_indicators": [
+    "macd",
+    "boll_ub",
+    "boll_lb",
+    "rsi_30",
+    "cci_30",
+    "dx_30",
+    "close_30_sma",
+    "close_60_sma"
+  ],
+  "observation_dimension": 481,
+  "action_dimension": 48,
+  "price_basis": "adjusted_virtual_units",
+  "raw_price_basis": "as_traded_unadjusted",
+  "factor_method": "BaoStock return-based backward adjustment, normalized at 2016-01-04",
+  "execution_timing": "finrl_same_close",
+  "tradability_policy": "enforce_column",
+  "source_policy": "All stock OHLC, volume, status and factors are BaoStock. tic keeps the existing .SS asset identifiers; baostock_code records provider identifiers.",
+  "benchmark": {
+    "code": "sh.000016",
+    "role": "external market price-index reference; same-pool equal-weight is the primary comparable baseline"
+  },
+  "splits": {
+    "train": {
+      "data_file": "train_data.csv",
+      "index_file": "train_index.csv",
+      "start": "2017-01-16",
+      "end": "2020-12-31",
+      "sessions": 965,
+      "rows": 46320,
+      "stocks": 48,
+      "nontradable_rows": 540,
+      "all_required_features_finite": true,
+      "risk_asset_count": 48,
+      "stage_coverage": {
+        "up": {
+          "sessions": 347,
+          "fraction": 0.35958549222797925,
+          "longest_contiguous_sessions": 72,
+          "meets_minimum_run": true
+        },
+        "sideways": {
+          "sessions": 456,
+          "fraction": 0.47253886010362695,
+          "longest_contiguous_sessions": 79,
+          "meets_minimum_run": true
+        },
+        "down": {
+          "sessions": 162,
+          "fraction": 0.16787564766839377,
+          "longest_contiguous_sessions": 44,
+          "meets_minimum_run": true
+        },
+        "all_three_meet_minimum_run": true
+      }
+    },
+    "validation": {
+      "data_file": "val_data.csv",
+      "index_file": "val_index.csv",
+      "start": "2021-01-04",
+      "end": "2022-12-30",
+      "sessions": 485,
+      "rows": 23280,
+      "stocks": 48,
+      "nontradable_rows": 15,
+      "all_required_features_finite": true,
+      "risk_asset_count": 48,
+      "stage_coverage": {
+        "up": {
+          "sessions": 49,
+          "fraction": 0.10103092783505155,
+          "longest_contiguous_sessions": 38,
+          "meets_minimum_run": true
+        },
+        "sideways": {
+          "sessions": 238,
+          "fraction": 0.49072164948453606,
+          "longest_contiguous_sessions": 39,
+          "meets_minimum_run": true
+        },
+        "down": {
+          "sessions": 198,
+          "fraction": 0.40824742268041236,
+          "longest_contiguous_sessions": 60,
+          "meets_minimum_run": true
+        },
+        "all_three_meet_minimum_run": true
+      }
+    },
+    "test": {
+      "data_file": "trade_data.csv",
+      "index_file": "test_index.csv",
+      "start": "2023-01-03",
+      "end": "2026-11-03",
+      "sessions": 927,
+      "rows": 44496,
+      "stocks": 48,
+      "nontradable_rows": 54,
+      "all_required_features_finite": true,
+      "risk_asset_count": 48,
+      "stage_coverage": {
+        "up": {
+          "sessions": 226,
+          "fraction": 0.24379719525350593,
+          "longest_contiguous_sessions": 61,
+          "meets_minimum_run": true
+        },
+        "sideways": {
+          "sessions": 528,
+          "fraction": 0.56957928802589,
+          "longest_contiguous_sessions": 97,
+          "meets_minimum_run": true
+        },
+        "down": {
+          "sessions": 173,
+          "fraction": 0.1866235167206041,
+          "longest_contiguous_sessions": 41,
+          "meets_minimum_run": true
+        },
+        "all_three_meet_minimum_run": true
+      }
+    }
+  },
+  "csv_sha256": {
+    "train_data.csv": "ee0c2ec08cd9239b700315b0e1658bea433e5c6916ac77208afca93143fb7d89",
+    "train_index.csv": "3824a6ff826b9cc517af3ff1ebbc35adff1d376e24be3cf0d789090f70232a6c",
+    "val_data.csv": "2a4d08b68780019f93a398169378a75fa048a5a59e28b99586a2bea829d8bf4d",
+    "val_index.csv": "8e667f017273c3831b6750aa202f03ca8d5ebd0a258253dbdd4276603f52a14b",
+    "trade_data.csv": "42f1d18073b759a62a56595924a222bf5f05c9f7b68cd7d87a8ff8fdc143f6ea",
+    "test_index.csv": "f4736d913330415e845c3365a50fd01250dd29a2adf3f586142bbf6177e212c6"
+  },
+  "selection_caveat": "Retrospective exclusion of merger-delisted stocks; not a point-in-time selected official SSE50 universe."
+}
