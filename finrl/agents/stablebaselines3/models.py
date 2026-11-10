@@ -21,9 +21,19 @@ from finrl import config
 from finrl.meta.env_stock_trading.env_stocktrading import StockTradingEnv
 from finrl.meta.preprocessor.preprocessors import data_split
 
-MODELS = {"a2c": A2C, "ddpg": DDPG, "td3": TD3, "sac": SAC, "ppo": PPO}
+try:
+    from sb3_contrib import RecurrentPPO, TQC
+except ImportError:
+    RecurrentPPO = None
+    TQC = None
 
-MODEL_KWARGS = {x: config.__dict__[f"{x.upper()}_PARAMS"] for x in MODELS.keys()}
+MODELS = {"a2c": A2C, "ddpg": DDPG, "td3": TD3, "sac": SAC, "ppo": PPO}
+if RecurrentPPO is not None and TQC is not None:
+    MODELS["recurrentppo"] = RecurrentPPO
+    MODELS["tqc"] = TQC
+RECURRENT_MODELS = {"recurrentppo"}
+
+MODEL_KWARGS = {x: config.__dict__[f"{x.upper()}_PARAMS"] for x in MODELS.keys() if f"{x.upper()}_PARAMS" in config.__dict__}
 
 NOISE = {
     "normal": NormalActionNoise,
@@ -167,16 +177,25 @@ class DRLAgent:
         test_env, test_obs = environment.get_sb_env()
         account_memory = None  # This help avoid unnecessary list creation
         actions_memory = None  # optimize memory consumption
-        # state_memory=[] #add memory pool to store states
+        recurrent = type(model).__name__.lower() in RECURRENT_MODELS
+        states = None
+        episode_starts = np.ones((test_env.num_envs,), dtype=bool) if recurrent else None
 
         test_env.reset()
         max_steps = len(environment.df.index.unique()) - 1
 
         for i in range(len(environment.df.index.unique())):
-            action, _states = model.predict(test_obs, deterministic=deterministic)
+            if recurrent:
+                action, states = model.predict(
+                    test_obs, state=states, episode_start=episode_starts, deterministic=deterministic
+                )
+            else:
+                action, _states = model.predict(test_obs, deterministic=deterministic)
             # account_memory = test_env.env_method(method_name="save_asset_memory")
             # actions_memory = test_env.env_method(method_name="save_action_memory")
             test_obs, rewards, dones, info = test_env.step(action)
+            if recurrent:
+                episode_starts = dones
 
             if (
                 i == max_steps - 1

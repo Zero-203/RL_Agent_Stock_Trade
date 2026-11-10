@@ -1,5 +1,7 @@
 # T04 训练模板
 
+算法注册、参数透传与循环预测约定见 [P1 接口契约 v1](../docs/P1_接口契约_v1.md)；回测侧消费约定见 [P1 与 P2 回测交接契约](../docs/P1_P2_回测交接契约_v1.md)。
+
 数据集文件放在 `datasets/<DATASETNAME>/` 下，默认包含配置指定的训练、验证和测试 CSV。训练入口只读取训练集和验证集，不读取测试 CSV。`DATASETNAME` 作为参数传入：
 
 ```powershell
@@ -16,10 +18,12 @@ python scripts\train_template.py --config path\to\smoke.json --dataset DOW30 --a
 
 ## 后续 T05 回测读取约定
 
-回测入口接收模型 zip 路径和 `DATASETNAME`。从 zip 的 `metadata.txt` 读取空行后的 JSON `effective_config`，校验算法和数据集名；不要仅依赖短文件名还原参数。加载方式采用原 FinRL/SB3 接口：
+支持的算法为 `ppo`、`ddpg`、`td3`、`sac`、`recurrentppo` 和 `tqc`；配置按当次 `--algorithm` 校验，可在对应算法段通过 `policy` 覆盖默认策略（如 `recurrentppo` 使用 `MlpLstmPolicy`）。推理加载请使用 `train_model.runner.load_model_for_inference(algorithm, model_path, device=device)`，自动区分 on-policy（不传 `buffer_size`）与 off-policy（`buffer_size=1`）。
 
 ```python
-model = MODELS[algorithm].load(model_path, device=device)
+from train_model.runner import load_model_for_inference
+
+model = load_model_for_inference(algorithm, model_path, device=device)
 account_values, actions = DRLAgent.DRL_prediction(
 	model=model,
 	environment=test_environment,

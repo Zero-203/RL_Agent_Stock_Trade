@@ -12,6 +12,8 @@
 #
 # Note: TA-Lib is intentionally absent - the default pipeline computes
 # indicators via stockstats. Install TA-Lib manually only if you need it.
+--extra-index-url https://download.pytorch.org/whl/cu126
+
 absl-py==2.3.1
 aiodns==3.6.1
 aiohappyeyeballs==2.6.1
@@ -146,6 +148,7 @@ referencing==0.36.2
 requests==2.32.5
 rich==15.0.0
 rpds-py==0.27.1
+sb3_contrib==2.7.1
 scikit-base==0.12.6
 scikit-learn==1.6.1
 scipy==1.13.1
@@ -171,7 +174,7 @@ threadpoolctl==3.7.0
 thriftpy2==0.4.20
 tomli==2.5.0
 toolz==1.2.0
-torch==2.8.0
+torch==2.8.0+cu126
 tqdm==4.70.1
 traitlets==5.15.1
 trio==0.31.0

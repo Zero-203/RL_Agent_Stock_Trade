@@ -65,11 +65,27 @@ def prepare(model_path, data_path, split, train_data=None, validation_data=None,
     return frame, env, tickers, outer, effective
 
 
-def replay(model, env, tickers, seed=0):
+def apply_threshold(raw_action, threshold_mode, threshold_config, critic=None):
+    """Map raw model actions to post-threshold actions; fail explicitly if unimplemented."""
+    arr = np.asarray(raw_action, dtype=np.float32)
+    if arr.ndim != 1 or not np.isfinite(arr).all() or (np.abs(arr) > 1 + 1e-6).any():
+        raise ValueError("Invalid action vector passed to apply_threshold")
+    if threshold_mode in (None, "none"):
+        return arr.astype(float), {"threshold_mode": "none"}
+    raise NotImplementedError(
+        f"Threshold mode '{threshold_mode}' is not implemented in this build; "
+        "simple threshold is provided by P3, critic threshold by P4."
+    )
+
+
+def replay(model, env, tickers, seed=0, threshold_mode=None, threshold_config=None):
     env.audit_orders = True
     obs, _ = env.reset(seed=seed)
     dates = env.df["date"].drop_duplicates().tolist()
     n = len(tickers)
+    recurrent = type(model).__name__.lower() == "recurrentppo"
+    states = None
+    episode_starts = True
     accounts, holdings, actions, trades = [], [], [], []
 
     def snapshot(date):
@@ -86,10 +102,17 @@ def replay(model, env, tickers, seed=0):
 
     snapshot(dates[0])
     for day in range(len(dates)-1):
-        action, _ = model.predict(np.asarray(obs, dtype=np.float32), deterministic=True)
-        action = np.asarray(action, dtype=float).reshape(-1)
-        if action.shape != (n,) or not np.isfinite(action).all() or (np.abs(action) > 1+1e-6).any():
+        if recurrent:
+            raw_action, states = model.predict(
+                np.asarray(obs, dtype=np.float32), state=states,
+                episode_start=np.asarray([episode_starts]), deterministic=True,
+            )
+        else:
+            raw_action, _ = model.predict(np.asarray(obs, dtype=np.float32), deterministic=True)
+        raw_action = np.asarray(raw_action, dtype=float).reshape(-1)
+        if raw_action.shape != (n,) or not np.isfinite(raw_action).all() or (np.abs(raw_action) > 1+1e-6).any():
             raise ValueError("Model returned an invalid action vector")
+        action, threshold_info = apply_threshold(raw_action, threshold_mode, threshold_config)
         action = np.clip(action, -1, 1)
         requested = (action*env.hmax).astype(int)
         before_positions = np.asarray(env.state[1+n:1+2*n], dtype=float).copy()
@@ -97,6 +120,8 @@ def replay(model, env, tickers, seed=0):
         prices = np.asarray(env.state[1:1+n], dtype=float).copy()
         env.order_trace = []
         obs, reward, terminated, truncated, _ = env.step(action.copy())
+        if recurrent:
+            episode_starts = bool(terminated or truncated)
         positions = np.asarray(env.state[1+n:1+2*n], dtype=float)
         fills = positions-before_positions
         fees = float(env.cost)-before_cost
@@ -123,7 +148,8 @@ def replay(model, env, tickers, seed=0):
             else:
                 reason = "filled"
             actions.append({"date": dates[day], "valuation_date": dates[day+1], "tic": ticker,
-                "model_action": action[i], "requested_shares": int(requested[i]),
+                "model_action": raw_action[i], "thresholded_action": float(action[i]),
+                "threshold_mode": threshold_info["threshold_mode"], "requested_shares": int(requested[i]),
                 "executed_shares": fills[i], "adjusted_execution_price": prices[i], "reason": reason})
         for trade in env.order_trace:
             if trade["filled_shares"] != 0:
@@ -165,15 +191,16 @@ def run_backtest(model_path, data_path, output_root, *, split="test", benchmark_
                  baselines=None, train_data=None, validation_data=None, metadata_path=None,
                  annualization=252, risk_free_rate=0.0, device="cpu"):
     from stable_baselines3 import PPO, DDPG, TD3, SAC
+    from sb3_contrib import RecurrentPPO, TQC
     import torch
     torch.set_num_threads(1)
     model_path, data_path = Path(model_path).resolve(), Path(data_path).resolve()
     frame, env, tickers, outer, effective = prepare(model_path, data_path, split, train_data, validation_data, metadata_path)
     algorithm = effective["algorithm"].lower()
-    classes = {"ppo": PPO, "ddpg": DDPG, "td3": TD3, "sac": SAC}
+    classes = {"ppo": PPO, "ddpg": DDPG, "td3": TD3, "sac": SAC, "recurrentppo": RecurrentPPO, "tqc": TQC}
     # Off-policy SB3 load otherwise recreates the training replay buffer,
     # which can consume gigabytes even though evaluation never learns.
-    inference_kwargs = {} if algorithm == "ppo" else {"buffer_size": 1}
+    inference_kwargs = {} if algorithm in ("ppo", "recurrentppo") else {"buffer_size": 1}
     model = classes[algorithm].load(str(model_path), device=device, **inference_kwargs)
     if model.observation_space.shape != env.observation_space.shape or model.action_space.shape != env.action_space.shape:
         raise ValueError("Saved model spaces disagree with the evaluation environment")
@@ -203,11 +230,12 @@ def run_backtest(model_path, data_path, output_root, *, split="test", benchmark_
         "framework_code_sha256": {path.name: sha256(path) for path in Path(__file__).parent.glob("*.py")},
         "model_path": str(model_path), "data_path": str(data_path), "output": str(output),
         "deterministic": True, "execution_timing": "FinRL same-close action at t, mark-to-market at t+1; simplified execution, not an executable next-open claim",
-        "inference_replay_buffer_size": None if algorithm == "ppo" else 1,
+        "inference_replay_buffer_size": None if algorithm in ("ppo", "recurrentppo") else 1,
+        "threshold_mode": effective.get("threshold_mode", "none"),
         "price_basis": "adjusted_virtual_units", "corporate_actions_paid_separately": False,
         "annualization": annualization, "risk_free_rate": risk_free_rate,
         "legacy_metadata_inferred": not bool(effective.get("data_contract")),
-        "runtime": {"python": platform.python_version(), "packages": {name: metadata.version(name) for name in ["numpy", "pandas", "stable-baselines3", "torch"]}},
+        "runtime": {"python": platform.python_version(), "packages": {name: metadata.version(name) for name in ["numpy", "pandas", "stable-baselines3", "sb3-contrib", "torch"]}},
         "limitations": ["Adjusted virtual units, no separate dividend/split/merger settlement.",
             "T+1, price limits, real lots, slippage and queue priority are not modeled.",
             "Same-close execution can be optimistic; do not describe as a causally executable trading system.",
@@ -215,7 +243,11 @@ def run_backtest(model_path, data_path, output_root, *, split="test", benchmark_
             "Regime summary compounds attributed daily returns across noncontiguous days; it is not a separate continuous strategy."]}
     write_json(output/"run_manifest.json", manifest)
     try:
-        accounts, actions, holdings, trades = replay(model, env, tickers, int(effective.get("seed",0)))
+        accounts, actions, holdings, trades = replay(
+            model, env, tickers, int(effective.get("seed",0)),
+            threshold_mode=effective.get("threshold_mode"),
+            threshold_config=effective.get("threshold_config"),
+        )
         metrics = {"strategy": curve_metrics(accounts["account_value"], annualization, risk_free_rate)}
         metrics["strategy"].update({"cumulative_cost": float(accounts["cumulative_cost"].iloc[-1]),
             "trade_count": len(trades), "mean_gross_exposure": float(accounts["gross_exposure"].mean()),

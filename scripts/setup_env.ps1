@@ -80,6 +80,7 @@ Write-Step "Upgrading pip"
 
 Write-Step "Installing pinned dependencies from requirements-lock.txt"
 & $VenvPy -m pip install -r $LockFile
+if ($LASTEXITCODE -ne 0) { throw "Installing pinned dependencies failed (exit code $LASTEXITCODE)." }
 
 Write-Step "Installing finrl (editable, no deps)"
 & $VenvPy -m pip install -e $RepoRoot --no-deps

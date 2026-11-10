@@ -18,7 +18,12 @@ from stable_baselines3.common.logger import configure
 
 from finrl.agents.stablebaselines3.models import DRLAgent, MODELS
 from trading_environment import build_environment, environment_hashes
-from train_model.config import SUPPORTED_ALGORITHMS, validate_config
+from train_model.config import (
+    ON_POLICY_ALGORITHMS,
+    SUPPORTED_ALGORITHMS,
+    validate_algorithm_config,
+    validate_config,
+)
 from train_model.data import load_train_val_data
 
 
@@ -39,15 +44,24 @@ def build_model(
     params = copy.deepcopy(model_kwargs)
     params["device"] = device
     policy_kwargs = params.pop("policy_kwargs", None)
+    effective_policy = params.pop("policy", None) or policy
     return DRLAgent(env=vector_environment).get_model(
         normalized_algorithm,
-        policy=policy,
+        policy=effective_policy,
         policy_kwargs=policy_kwargs,
         model_kwargs=params,
         seed=int(seed),
         tensorboard_log=str(tensorboard_log),
         verbose=int(verbose),
     )
+
+
+def load_model_for_inference(algorithm: str, model_path: str | Path, device: str = "auto"):
+    normalized_algorithm = algorithm.lower()
+    if normalized_algorithm not in SUPPORTED_ALGORITHMS:
+        raise ValueError(f"Unsupported algorithm: {algorithm}")
+    load_kwargs = {} if normalized_algorithm in ON_POLICY_ALGORITHMS else {"buffer_size": 1}
+    return MODELS[normalized_algorithm].load(str(model_path), device=device, **load_kwargs)
 
 
 def _resolve_path(root: Path, configured_path: str) -> Path:
@@ -96,6 +110,12 @@ def build_model_stem(
             ("batch_size", "b"),
             ("ent_coef", "ent"),
         ),
+        "recurrentppo": (
+            ("learning_rate", "lr"),
+            ("n_steps", "n"),
+            ("batch_size", "b"),
+            ("ent_coef", "ent"),
+        ),
         "ddpg": (
             ("learning_rate", "lr"),
             ("batch_size", "b"),
@@ -109,6 +129,13 @@ def build_model_stem(
             ("learning_starts", "start"),
         ),
         "sac": (
+            ("learning_rate", "lr"),
+            ("batch_size", "b"),
+            ("buffer_size", "buf"),
+            ("learning_starts", "start"),
+            ("ent_coef", "ent"),
+        ),
+        "tqc": (
             ("learning_rate", "lr"),
             ("batch_size", "b"),
             ("buffer_size", "buf"),
@@ -170,10 +197,8 @@ def run_training(
     run_type: str = "main",
     device: str | None = None,
 ) -> dict[str, Any]:
-    validate_config(config)
     algorithm = algorithm.lower()
-    if algorithm not in SUPPORTED_ALGORITHMS:
-        raise ValueError(f"Unsupported algorithm: {algorithm}")
+    validate_algorithm_config(config, algorithm)
     if run_type not in ("main", "pilot", "smoke"):
         raise ValueError("run_type must be one of: main, pilot, smoke")
 
@@ -186,6 +211,11 @@ def run_training(
         raise ValueError("total_timesteps must be positive")
     if effective_timesteps != configured_timesteps and run_type == "main":
         raise ValueError("Changing total_timesteps requires run_type='pilot' or 'smoke'")
+    threshold_mode = config.get("threshold_mode") or training_config.get("threshold_mode")
+    if threshold_mode not in (None, "none"):
+        raise NotImplementedError(
+            f"Threshold mode '{threshold_mode}' is inference-only and not implemented in training runner"
+        )
 
     if (
         not dataset_name
@@ -252,13 +282,14 @@ def run_training(
         )
     manifest_path = result_dir / "run_manifest.json"
 
+    effective_policy = model_kwargs.get("policy") or training_config.get("policy", "MlpPolicy")
     effective_config = {
         "algorithm": algorithm,
         "dataset_name": dataset_name,
         "seed": int(seed),
         "run_type": run_type,
         "total_timesteps": effective_timesteps,
-        "policy": training_config["policy"],
+        "policy": effective_policy,
         "device": effective_device,
         "model_kwargs": model_kwargs,
         "environment": environment_config,
@@ -276,6 +307,7 @@ def run_training(
             "execution_timing": "finrl_same_close",
             "observation_dimension": int(1 + (2 + len(environment_config["tech_indicator_list"])) * train_frame["tic"].nunique()),
             "action_dimension": int(train_frame["tic"].nunique()),
+            "train_start": min(train_frame["date"]),
             "train_end": max(train_frame["date"]),
             "validation_start": min(val_frame["date"]),
             "validation_end": max(val_frame["date"]),
@@ -300,6 +332,7 @@ def run_training(
             "packages": {
                 "finrl": _package_version("finrl"),
                 "stable-baselines3": _package_version("stable-baselines3"),
+                "sb3-contrib": _package_version("sb3-contrib"),
                 "torch": _package_version("torch"),
                 "pandas": _package_version("pandas"),
             },
@@ -320,7 +353,7 @@ def run_training(
             seed=int(seed),
             tensorboard_log=tensorboard_dir,
             device=effective_device,
-            policy=training_config["policy"],
+            policy=training_config.get("policy", "MlpPolicy"),
             verbose=int(training_config.get("verbose", 1)),
         )
         logger = configure(
@@ -333,14 +366,16 @@ def run_training(
             tb_log_name=run_id,
             total_timesteps=effective_timesteps,
         )
+        effective_config["requested_timesteps"] = effective_timesteps
+        effective_config["actual_timesteps"] = int(getattr(trained_model, "num_timesteps", effective_timesteps))
+        effective_config["actual_policy"] = type(trained_model.policy).__name__
+        if algorithm not in ON_POLICY_ALGORITHMS:
+            effective_config["actual_gradient_updates"] = int(getattr(trained_model, "_n_updates", 0))
         trained_model.save(str(model_path.with_suffix("")))
         if not model_path.is_file():
             raise RuntimeError(f"SB3 model archive was not created: {model_path}")
 
-        inference_kwargs = {} if algorithm == "ppo" else {"buffer_size": 1}
-        reloaded_model = MODELS[algorithm].load(
-            str(model_path), device=effective_device, **inference_kwargs
-        )
+        reloaded_model = load_model_for_inference(algorithm, model_path, device=effective_device)
         account_values, actions = DRLAgent.DRL_prediction(
             model=reloaded_model,
             environment=validation_environment,
@@ -371,7 +406,8 @@ def run_training(
             "artifacts": manifest["artifacts"],
         }
         _write_archive_metadata(model_path, archive_metadata)
-        MODELS[algorithm].load(str(model_path), device=effective_device, **inference_kwargs)
+        load_model_for_inference(algorithm, model_path, device=effective_device)
+        _write_json(result_dir / "effective_config.json", effective_config)
         _write_json(manifest_path, manifest)
         return manifest
     except Exception as error:

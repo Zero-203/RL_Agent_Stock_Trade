@@ -29,6 +29,8 @@ python -m pip install git+https://github.com/AI4Finance-Foundation/ElegantRL.git
 说明：
 
 - `requirements-lock.txt` 是本项目的**权威环境**（pip 全量锁定）；上游的 `requirements.txt` / `pyproject.toml` 仅供参考。
+- 锁文件固定 Windows、Python 3.9 的 `torch==2.8.0+cu126`，并在 pip 配置的默认索引之外增加 PyTorch 官方 CUDA 12.6 索引。PyTorch 安装包约 2.9 GB，需要网络和足够磁盘空间。该版本也支持 CPU 运算；使用 GPU 时需兼容的 NVIDIA 驱动。
+- 安装后可运行 `python -m pip check`，并通过 `python -c "import torch; print(torch.__version__, torch.version.cuda, torch.cuda.is_available())"` 检查版本和 GPU 可用性。CUDA 可用性取决于本机环境，不代表训练链路已验证。
 - 默认流程使用 stockstats 计算技术指标，**不需要 TA-Lib**；如确需使用请自行安装。
 - ElegantRL 从 GitHub 源码安装，网络不可达时请先配置代理或使用镜像。
 
@@ -63,7 +65,7 @@ python examples\FinRL_StockTrading_2026_3_Backtest.py   # 回测并与基线比�
 python scripts\train_template.py --dataset DOW30_example --algorithm ppo --seed 42
 ```
 
-支持的算法为 `ppo`、`ddpg`、`td3` 和 `sac`。试运行可通过 `--timesteps` 覆盖总步数，并将 `--run-type` 设为 `pilot` 或 `smoke`；覆盖仅改变总步数，不会自动缩小算法的 rollout/batch 等参数。特别是 PPO，若要缩短实际冒烟时间，应在临时 JSON 配置中同时调小 `n_steps` 等参数。
+支持的算法为 `ppo`、`ddpg`、`td3`、`sac`、`recurrentppo` 和 `tqc`。配置按当次 `--algorithm` 校验，可在对应算法段通过 `policy` 覆盖默认策略（如 `recurrentppo` 使用 `MlpLstmPolicy`）。试运行可通过 `--timesteps` 覆盖总步数，并将 `--run-type` 设为 `pilot` 或 `smoke`；覆盖仅改变总步数，不会自动缩小算法的 rollout/batch 等参数。特别是 PPO/RecurrentPPO，若要缩短实际冒烟时间，应在临时 JSON 配置中同时调小 `n_steps` 等参数。
 
 - **模型**：保存为 SB3 原生 `.zip`，路径为 `trained_models/<DATASETNAME>/<algorithm>/`。文件名简要包含算法、种子、训练步数和主要超参数；完整有效配置、训练/验证数据哈希、环境及运行信息写入 zip 内的 `metadata.txt`。同名模型不会被覆盖。
 - **训练日志**：写入 `tensorboard_log/<DATASETNAME>/<algorithm>/<run_id>/`，包含 SB3 CSV/TensorBoard 日志。
@@ -73,7 +75,7 @@ python scripts\train_template.py --dataset DOW30_example --algorithm ppo --seed 
 
 T05 回测入口应接收训练完成的 SB3 模型 `.zip` 路径和 `DATASETNAME`，不从文件名推断完整配置。模型 zip 内含 `metadata.txt`：文件以说明行开头，空行后为 JSON；`effective_config` 保存算法、数据集名、种子、训练步数、策略、算法参数、环境参数和数据路径，顶层 `runtime` 记录软件版本等运行信息。回测脚本应读取并校验其中的算法和数据集与本次请求一致。
 
-模型加载复用 FinRL 的 SB3 算法映射与预测接口：`MODELS[algorithm].load(model_path, device=...)` 加载模型，再将配置中 `data.test_file` 指向的测试 CSV 构造成同规格 `StockTradingEnv`，并调用 `DRLAgent.DRL_prediction(model, environment, deterministic=True)` 获取账户价值和动作轨迹。测试集只用于最终样本外回测，不用于训练、调参或选模；验证集选模及统一指标、结果登记由 T05 按项目协议实现。
+模型加载通过 `train_model.runner.load_model_for_inference(algorithm, model_path, device=...)` 自动区分 on-policy（`ppo`、`recurrentppo` 不传 `buffer_size`）与 off-policy（`buffer_size=1`），再将配置中 `data.test_file` 指向的测试 CSV 构造成共享交易环境，调用 `DRLAgent.DRL_prediction(model, environment, deterministic=True)` 或统一回测入口获取账户价值和动作轨迹。测试集只用于最终样本外回测，不用于训练、调参或选模；验证集选模及统一指标、结果登记由 T05 按项目协议实现。
 
 ## 项目结构
 
@@ -83,7 +85,7 @@ T05 回测入口应接收训练完成的 SB3 模型 `.zip` 路径和 `DATASETNAM
 | --- | --- |
 | `finrl/` | FinRL 库源码（上游代码，含 agents / meta / applications 三层） |
 | `examples/` | 上游教程脚本与 Notebook（快速开始入口） |
-| `docs/` | 上游 Sphinx 文档源；`docs/upstream/` 归档上游 README；`docs/小组项目计划v1.2.md` 为本组完整项目计划 |
+| `docs/` | 项目文档与契约；`docs/小组项目计划v2.0.md` 为现行计划（保留 `v1.2` 历史版）；`docs/upstream/` 归档上游 README |
 | `config/train_model.json` | T04 JSON 实验配置（数据文件名、环境、算法超参数及输出目录） |
 | `scripts/` | 小组脚本入口，包括 `setup_env.ps1` 和 `train_template.py` |
 | `src/train_model/` | T04 数据加载、环境构造、训练、验证及运行追踪模块 |
@@ -105,7 +107,8 @@ T05 回测入口应接收训练完成的 SB3 模型 `.zip` 路径和 `DATASETNAM
 
 ## 项目文档
 
-- 完整项目计划：[docs/小组项目计划v1.2.md](docs/小组项目计划v1.2.md)
+- 现行项目计划：[docs/小组项目计划v2.0.md](docs/小组项目计划v2.0.md)（历史版本：[v1.2](docs/小组项目计划v1.2.md)）
+- 接口交接契约：[docs/P1_P2_回测交接契约_v1.md](docs/P1_P2_回测交接契约_v1.md)、[docs/P1_接口契约_v1.md](docs/P1_接口契约_v1.md)
 - 上游 FinRL 文档：[docs/upstream/README_FinRL.md](docs/upstream/README_FinRL.md)、[官方文档站点](https://finrl.readthedocs.io/)
 
 ## 免责声明

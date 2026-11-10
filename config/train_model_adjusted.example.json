@@ -60,6 +60,20 @@
       "learning_rate": 0.0001,
       "learning_starts": 100,
       "ent_coef": "auto_0.1"
+    },
+    "recurrentppo": {
+      "policy": "MlpLstmPolicy",
+      "n_steps": 2048,
+      "ent_coef": 0.01,
+      "learning_rate": 0.00025,
+      "batch_size": 64
+    },
+    "tqc": {
+      "batch_size": 64,
+      "buffer_size": 100000,
+      "learning_rate": 0.0001,
+      "learning_starts": 100,
+      "ent_coef": "auto_0.1"
     }
   },
   "output": {
