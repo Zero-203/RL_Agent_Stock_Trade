@@ -1,0 +1,25 @@
+{
+  "defaults": {
+    "data_path": "datasets/YOUR_DATASET/val_data.csv",
+    "benchmark_path": "datasets/YOUR_DATASET/val_index.csv",
+    "output_root": "results/backtest",
+    "split": "validation",
+    "device": "cpu",
+    "threshold_mode": "none",
+    "threshold_config": {}
+  },
+  "jobs": [
+    {"model_path": "trained_models/YOUR_DATASET/sac/YOUR_SAME_MODEL.zip"},
+    {
+      "model_path": "trained_models/YOUR_DATASET/sac/YOUR_SAME_MODEL.zip",
+      "threshold_mode": "simple",
+      "threshold_config": {"q_min": 5}
+    },
+    {
+      "model_path": "trained_models/YOUR_DATASET/sac/YOUR_SAME_MODEL.zip",
+      "threshold_mode": "critic",
+      "threshold_config": {"P4_RULE_AND_PARAMETERS_MUST_BE_REGISTERED": true}
+    }
+  ],
+  "summary_output": "results/backtest/threshold_validation_summary.csv"
+}
