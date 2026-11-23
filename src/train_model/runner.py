@@ -347,7 +347,12 @@ def run_training(
             deterministic=True,
         )
         account_values.to_csv(result_dir / "validation_account_value.csv", index=False)
-        actions.to_csv(result_dir / "validation_actions.csv", index=False)
+        actions_to_save = actions
+        if "date" not in actions_to_save.columns:
+            actions_to_save = actions_to_save.reset_index()
+            if "date" not in actions_to_save.columns and "index" in actions_to_save.columns:
+                actions_to_save = actions_to_save.rename(columns={"index": "date"})
+        actions_to_save.to_csv(result_dir / "validation_actions.csv", index=False)
 
         manifest["status"] = "completed"
         manifest["completed_at_utc"] = datetime.now(timezone.utc).isoformat()
