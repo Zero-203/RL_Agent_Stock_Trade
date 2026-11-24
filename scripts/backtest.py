@@ -35,6 +35,9 @@ def main():
     run.add_argument("--annualization", type=int, default=252)
     run.add_argument("--risk-free-rate", type=float, default=0)
     run.add_argument("--device", default="cpu")
+    run.add_argument("--threshold-mode", choices=["none", "simple", "critic"], default="none")
+    run.add_argument("--threshold-config", type=Path, metavar="JSON_FILE",
+                     help="JSON object containing inference-only threshold parameters")
     batch = commands.add_parser("batch", help="Serial evaluation of an explicit job list")
     batch.add_argument("--config", type=Path, required=True)
     summary = commands.add_parser("summarize")
@@ -60,7 +63,10 @@ def main():
             result = run_backtest(args.model, args.data, args.output_root, split=args.split,
                 benchmark_path=args.benchmark, baselines=baselines, train_data=args.train_data,
                 validation_data=args.validation_data, metadata_path=args.metadata,
-                annualization=args.annualization, risk_free_rate=args.risk_free_rate, device=args.device)
+                annualization=args.annualization, risk_free_rate=args.risk_free_rate, device=args.device,
+                threshold_mode=args.threshold_mode,
+                threshold_config=(json.loads(args.threshold_config.read_text(encoding="utf-8-sig"))
+                                  if args.threshold_config else None))
             print(json.dumps(result, ensure_ascii=False, indent=2))
         elif args.command == "summarize":
             result = summarize_runs(args.manifests, args.output)

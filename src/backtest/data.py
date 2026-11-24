@@ -74,7 +74,7 @@ def read_metadata(model_path, metadata_path=None):
     for name in ["algorithm", "environment", "data_hashes", "data_paths"]:
         if name not in effective:
             raise ValueError(f"Missing metadata field {name}")
-    if effective["algorithm"].lower() not in ["ppo", "ddpg", "td3", "sac"]:
+    if effective["algorithm"].lower() not in ["ppo", "ddpg", "td3", "sac", "recurrentppo", "tqc"]:
         raise ValueError("Unsupported project algorithm")
     return result, effective
 

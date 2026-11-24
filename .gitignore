@@ -160,8 +160,9 @@ trained_models/
 tensorboard_log/
 datasets/
 
-# Local-only test code and notes
+# Local-only test code and Ref notes
 local_test/
+RefDocs
 
 # final_deliverables/ is intentionally NOT ignored:
 # it is committed once at final delivery (one-shot, no incremental tracking).
