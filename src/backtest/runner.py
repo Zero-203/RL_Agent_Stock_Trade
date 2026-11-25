@@ -80,6 +80,23 @@ def _threshold_settings(mode, config):
     return mode, config
 
 
+def threshold_source_files() -> tuple[Path, ...]:
+    """Return call-site runner.py plus all current Python modules under src/thresholds/."""
+    this_file = Path(__file__).resolve()
+    return (this_file, *sorted((this_file.parents[1] / "thresholds").glob("*.py")))
+
+
+THRESHOLD_SOURCE_FILES = threshold_source_files()
+
+
+def threshold_implementation_sha256():
+    """Fingerprint the call site (this file) plus every module under src/thresholds/."""
+    digest = hashlib.sha256()
+    for path in threshold_source_files():
+        digest.update(f"{path.parent.name}/{path.name}:{sha256(path)}\n".encode("utf-8"))
+    return digest.hexdigest()
+
+
 def threshold_identity(mode=None, config=None, implementation_sha256=None):
     mode, config = _threshold_settings(mode, config)
     payload = {"threshold_contract_version": "p2-v1", "threshold_mode": mode,
@@ -135,9 +152,12 @@ def apply_threshold(raw_action, threshold_mode, threshold_config, critic=None, *
     threshold_mode, threshold_config = _threshold_settings(threshold_mode, threshold_config)
     if threshold_mode == "none":
         return arr, {"threshold_mode": "none"}
+    if threshold_mode == "critic":
+        from thresholds.critic import apply_critic_threshold
+        return apply_critic_threshold(arr, threshold_config, model=model, obs=obs, algorithm=algorithm)
     raise NotImplementedError(
         f"Threshold mode '{threshold_mode}' is not implemented in this build; "
-        "simple threshold is provided by P3, critic threshold by P4."
+        "simple threshold is provided by P3."
     )
 
 
@@ -261,7 +281,7 @@ def run_backtest(model_path, data_path, output_root, *, split="test", benchmark_
                  baselines=None, train_data=None, validation_data=None, metadata_path=None,
                  annualization=252, risk_free_rate=0.0, device="cpu",
                  threshold_mode="none", threshold_config=None):
-    condition = threshold_identity(threshold_mode, threshold_config, sha256(Path(__file__)))
+    condition = threshold_identity(threshold_mode, threshold_config, threshold_implementation_sha256())
     from stable_baselines3 import PPO, DDPG, TD3, SAC
     from sb3_contrib import RecurrentPPO, TQC
     import torch
@@ -300,6 +320,7 @@ def run_backtest(model_path, data_path, output_root, *, split="test", benchmark_
         "ordered_tickers": tickers, "environment": effective["environment"],
         "environment_code_sha256": environment_hashes(), "input_sha256": hashes,
         "framework_code_sha256": {path.name: sha256(path) for path in Path(__file__).parent.glob("*.py")},
+        "threshold_code_sha256": {f"{path.parent.name}/{path.name}": sha256(path) for path in threshold_source_files()},
         "model_path": str(model_path), "data_path": str(data_path), "output": str(output),
         "deterministic": True, "execution_timing": "FinRL same-close action at t, mark-to-market at t+1; simplified execution, not an executable next-open claim",
         "inference_replay_buffer_size": None if algorithm in ("ppo", "recurrentppo") else 1,
@@ -343,7 +364,7 @@ def run_backtest(model_path, data_path, output_root, *, split="test", benchmark_
         _plots(curves, output)
         if any(sha256(path) != hashes[name] for name, path in source_paths.items()):
             raise RuntimeError("An input changed during evaluation")
-        if condition["threshold_mode"] != "none" and sha256(Path(__file__)) != condition["threshold_implementation_sha256"]:
+        if condition["threshold_mode"] != "none" and threshold_implementation_sha256() != condition["threshold_implementation_sha256"]:
             raise RuntimeError("Threshold implementation changed during evaluation")
         manifest.update({"status": "completed", "completed_at_utc": datetime.now(timezone.utc).isoformat(),
             "dates": {"start": dates[0], "end": dates[-1], "observations": len(dates)},

@@ -1,0 +1,36 @@
+{
+  "defaults": {
+    "data_path": "datasets/sse48_baostock_v2/val_data.csv",
+    "benchmark_path": "datasets/sse48_baostock_v2/val_index.csv",
+    "output_root": "results/backtest/p4_critic_validation",
+    "split": "validation",
+    "device": "cpu",
+    "threshold_mode": "none",
+    "threshold_config": {}
+  },
+  "jobs": [
+    {"model_path": "trained_models/sse48_baostock_v2/sac/YOUR_SAC_SEED_MODEL.zip"},
+    {
+      "model_path": "trained_models/sse48_baostock_v2/sac/YOUR_SAC_SEED_MODEL.zip",
+      "threshold_mode": "critic",
+      "threshold_config": {"rule": "critic_delta_v1", "summary": "min_q", "delta_threshold": 0.0}
+    },
+    {
+      "model_path": "trained_models/sse48_baostock_v2/sac/YOUR_SAC_SEED_MODEL.zip",
+      "threshold_mode": "critic",
+      "threshold_config": {"rule": "critic_delta_v1", "summary": "min_q", "delta_threshold": "REPLACE_WITH_REGISTERED_CANDIDATE"}
+    },
+    {"model_path": "trained_models/sse48_baostock_v2/tqc/YOUR_TQC_SEED_MODEL.zip"},
+    {
+      "model_path": "trained_models/sse48_baostock_v2/tqc/YOUR_TQC_SEED_MODEL.zip",
+      "threshold_mode": "critic",
+      "threshold_config": {"rule": "critic_delta_v1", "summary": "truncated_quantile_mean", "delta_threshold": 0.0}
+    },
+    {
+      "model_path": "trained_models/sse48_baostock_v2/tqc/YOUR_TQC_SEED_MODEL.zip",
+      "threshold_mode": "critic",
+      "threshold_config": {"rule": "critic_delta_v1", "summary": "truncated_quantile_mean", "delta_threshold": "REPLACE_WITH_REGISTERED_CANDIDATE"}
+    }
+  ],
+  "summary_output": "results/backtest/p4_critic_validation/summary.csv"
+}

@@ -85,8 +85,8 @@ T05 回测入口应接收训练完成的 SB3 模型 `.zip` 路径和 `DATASETNAM
 | --- | --- |
 | `finrl/` | FinRL 库源码（上游代码，含 agents / meta / applications 三层） |
 | `examples/` | 上游教程脚本与 Notebook（快速开始入口） |
-| `src/` | 小组自研核心源码（按模块建子目录：`data_pipeline/`、`train_model/`、`backtest/`、`thresholds/`、`baselines/`、`ensemble/`、`evaluation/`；共享环境 `trading_environment.py` 暂留根目录） |
-| `scripts/` | 可直接运行的小组入口脚本（`setup_env.ps1`、`prepare_sse48.py`、`validate_prepared48.py`、`train_template.py`、`backtest.py`、冒烟测试等；不存放文档） |
+| `src/` | 小组自研核心源码（按模块建子目录：`data_pipeline/`、`train_model/`、`backtest/`、`sac/`、`tqc/`、`thresholds/`、`baselines/`、`ensemble/`、`evaluation/`；共享环境 `trading_environment.py` 暂留根目录） |
+| `scripts/` | 可直接运行的小组入口脚本（`setup_env.ps1`、`prepare_sse48.py`、`validate_prepared48.py`、`train_template.py`、`backtest.py`、`run_equal_weight_baseline.py`、`p4_critic_diagnostics.py`、冒烟测试等；不存放文档） |
 | `config/` | 实验、数据与门限 JSON 配置 |
 | `docs/` | 根目录仅保留现行唯一计划 `docs/小组项目计划.md`（旧版通过 Git 追溯）；下设 `modules/`（模块说明）、`contracts/`（接口契约）、`handoffs/`（交接说明）及 `upstream/`（上游归档） |
 | `unit_tests/` | 单元测试与接口/门限/回测回归测试 |
@@ -113,7 +113,7 @@ T05 回测入口应接收训练完成的 SB3 模型 `.zip` 路径和 `DATASETNAM
 ## 项目文档
 
 - 现行项目计划：[docs/小组项目计划.md](docs/小组项目计划.md)（历史版本通过 Git 追溯）
-- 模块说明：[数据准备](docs/modules/module_data_sse48.md)、[训练模板](docs/modules/module_train_model.md)、[统一回测](docs/modules/module_backtest.md)
+- 模块说明：[数据准备](docs/modules/module_data_sse48.md)、[训练模板](docs/modules/module_train_model.md)、[统一回测](docs/modules/module_backtest.md)、[等权基线](docs/modules/module_baselines_equal_weight.md)、[P4 实验方案](docs/modules/module_p4_sac_tqc.md)、[SAC 模块](docs/modules/module_p4_sac.md)、[TQC 模块](docs/modules/module_p4_tqc.md)
 - 接口契约：[P1 接口契约](docs/contracts/contract_p1_train_interface_v1.md)、[P1 与 P2 回测交接契约](docs/contracts/contract_p1_p2_backtest_v1.md)
 - 上游 FinRL 文档：[docs/upstream/README_FinRL.md](docs/upstream/README_FinRL.md)、[官方文档站点](https://finrl.readthedocs.io/)
 

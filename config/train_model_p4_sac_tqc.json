@@ -1,0 +1,79 @@
+{
+  "data": {
+    "root_dir": "datasets",
+    "train_file": "train_data.csv",
+    "val_file": "val_data.csv",
+    "test_file": "trade_data.csv"
+  },
+  "environment": {
+    "hmax": 100,
+    "initial_amount": 1000000,
+    "buy_cost_pct": 0.001,
+    "sell_cost_pct": 0.001,
+    "reward_scaling": 0.0001,
+    "tech_indicator_list": [
+      "macd",
+      "boll_ub",
+      "boll_lb",
+      "rsi_30",
+      "cci_30",
+      "dx_30",
+      "close_30_sma",
+      "close_60_sma"
+    ],
+    "risk_indicator_col": "turbulence",
+    "turbulence_threshold": null,
+    "price_basis": "adjusted_virtual_units",
+    "tradability_policy": "enforce_column"
+  },
+  "training": {
+    "total_timesteps": 100000,
+    "policy": "MlpPolicy",
+    "device": "cuda",
+    "verbose": 1,
+    "logger_formats": [
+      "stdout",
+      "csv",
+      "tensorboard"
+    ]
+  },
+  "algorithms": {
+    "sac": {
+      "learning_rate": 0.0003,
+      "buffer_size": 100000,
+      "learning_starts": 1000,
+      "batch_size": 256,
+      "tau": 0.005,
+      "gamma": 0.99,
+      "train_freq": 1,
+      "gradient_steps": 1,
+      "ent_coef": "auto_0.1",
+      "policy_kwargs": {
+        "net_arch": [256, 256],
+        "n_critics": 2
+      }
+    },
+    "tqc": {
+      "learning_rate": 0.0003,
+      "buffer_size": 100000,
+      "learning_starts": 1000,
+      "batch_size": 256,
+      "tau": 0.005,
+      "gamma": 0.99,
+      "train_freq": 1,
+      "gradient_steps": 1,
+      "ent_coef": "auto_0.1",
+      "top_quantiles_to_drop_per_net": 2,
+      "policy_kwargs": {
+        "net_arch": [256, 256],
+        "n_critics": 2,
+        "n_quantiles": 25
+      }
+    }
+  },
+  "output": {
+    "trained_models_dir": "trained_models",
+    "tensorboard_log_dir": "tensorboard_log",
+    "results_dir": "results/train_model"
+  }
+}

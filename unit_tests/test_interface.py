@@ -166,7 +166,7 @@ class InterfaceTests(unittest.TestCase):
             apply_threshold(np.array([2.0, 0.0]), None, None)
         with self.assertRaises(NotImplementedError):
             apply_threshold(action, "simple", {"threshold": 0.1})
-        with self.assertRaises(NotImplementedError):
+        with self.assertRaises(ValueError):  # P4 critic is implemented; empty config is rejected
             apply_threshold(action, "critic", {})
         cfg = base_config()
         cfg["threshold_mode"] = "simple"
