@@ -2,7 +2,7 @@
 
 > 状态：**草案（待与 P3 共同冻结控制量；Critic 候选阈值待 pilot 后登记）**  
 > 分支：`feat/p4-sac-tqc`  
-> 算法与代码实现文档：[SAC 模块说明](module_p4_sac.md)（`src/sac/`）、[TQC 模块说明](module_p4_tqc.md)（`src/tqc/`）、诊断脚本 [p4_critic_diagnostics.py](../../scripts/p4_critic_diagnostics.py)  
+> 算法与代码实现文档：[SAC 模块说明](module_p4_sac.md)（`src/sac/`）、[TQC 模块说明](module_p4_tqc.md)（`src/tqc/`）、[P4 补充诊断与参数优化消融](module_p4_ablation_optimization.md)、诊断脚本 [p4_critic_diagnostics.py](../../scripts/p4_critic_diagnostics.py)  
 > 依据：[小组项目计划](../小组项目计划.md) 第 2.1、2.3、2.4 节，[P1 接口契约 v1](../contracts/contract_p1_train_interface_v1.md)，[P2 回测更新交付 v1](../handoffs/handoff_p2_backtest_update_v1.md)，[基础联调交接单 v1](../handoffs/handoff_s0_baseline_integration_v1.md)。
 
 ## 1. 范围
