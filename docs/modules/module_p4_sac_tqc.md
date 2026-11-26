@@ -110,16 +110,17 @@ python scripts/p4_critic_diagnostics.py select --algorithm tqc --seeds 42 2024 2
 ## 7. 验收清单
 
 - [x] Critic 门限实现与 P2 返回契约对齐（形状、`float32`、整向量拒绝、诊断有限值）
-- [x] 单元测试：摘要与独立计算一致、严格边界、配置校验、非有限值报错、全放行等价于无门限、全拒绝不下单、实现指纹覆盖门限模块、P4 配置可构建 SAC / TQC
-- [ ] smoke：`actual_gradient_updates > 0`，SAC / TQC 模型可重载与回放
-- [ ] pilot：记录 `actual_timesteps`、耗时、显存，与 P3 冻结 `total_timesteps` 与种子
-- [ ] 第 8 节候选阈值登记并提交
+- [x] 单元测试：摘要与独立计算一致、严格边界、配置校验、非有限值报错、全放行等价于无门限、全拒绝不下单、实现指纹覆盖门限模块、P4 配置可构建 SAC / TQC（全量 60 项单测通过）
+- [x] 数据集与基线：`sse48_baostock_v2` 本地构建完成，6 份 CSV SHA256 与 P2 发布快照 100% 一致；验证集同池等权基线已生成（总收益 `+2.54%`，Sharpe `0.1618`）
+- [x] smoke（2,000 步，RTX 3060 Laptop CUDA）：SAC 耗时 `44.5s`、TQC 耗时 `44.1s`，`actual_gradient_updates = 1000 > 0`，模型重载与回放验证通过
+- [x] pilot（20,000 步，RTX 3060 Laptop CUDA）：SAC 耗时 `516.7s`（约 `8.6` 分钟）、TQC 耗时 `516.2s`（约 `8.6` 分钟），`actual_gradient_updates = 19000`；推算 100,000 步单次正式训练约 `43` 分钟，6 次合计约 `4.3` GPU 小时（待与 P3 对齐确认最终 `total_timesteps` 与 3 个种子）
+- [x] 第 8 节候选阈值登记并提交（严守测试集隔离，未读取 `trade_data.csv` 策略表现）
 - [ ] 6 次正式训练完成，验证集选定并冻结 SAC / TQC 阈值（及 P3 简单门限）
 - [ ] P5 冻结选中模型后，执行 S0/S1/S2、T0/T1/T2 共 18 次测试回测
 
-## 8. 候选阈值登记表（pilot 后填写）
+## 8. 候选阈值登记表（已按 20k Pilot 验证集 484 个决策日标定）
 
-| 算法 | 摘要 | pilot 模型 | 候选 `delta_threshold` | 登记日期 / 提交 |
-| --- | --- | --- | --- | --- |
-| SAC | `min_q` | 待填 | 待填 | 待填 |
-| TQC | `truncated_quantile_mean` | 待填 | 待填 | 待填 |
+| 算法 | 摘要 | Pilot 模型（`seed=42, t=20k`） | 验证集 `critic_delta` 分位数（`P25 / P50 / P75`） | 登记候选 `delta_threshold`（`{0.0, P25, P50, P75}` 两位有效数字） | 登记日期 |
+| --- | --- | --- | --- | --- | --- |
+| SAC | `min_q` | `sac_s42_t20k_lr0p0003_b256_buf100k_start1000_entauto0p1.zip` | `0.1065 / 0.2630 / 0.3397` | `[0.0, 0.11, 0.26, 0.34]` | 2026-11-26 |
+| TQC | `truncated_quantile_mean` | `tqc_s42_t20k_lr0p0003_b256_buf100k_start1000_entauto0p1.zip` | `1.4053 / 1.8686 / 2.1022` | `[0.0, 1.4, 1.9, 2.1]` | 2026-11-26 |
