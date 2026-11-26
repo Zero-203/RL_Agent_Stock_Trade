@@ -115,8 +115,8 @@ python scripts/p4_critic_diagnostics.py select --algorithm tqc --seeds 42 2024 2
 - [x] smoke（2,000 步，RTX 3060 Laptop CUDA）：SAC 耗时 `44.5s`、TQC 耗时 `44.1s`，`actual_gradient_updates = 1000 > 0`，模型重载与回放验证通过
 - [x] pilot（20,000 步，RTX 3060 Laptop CUDA）：SAC 耗时 `516.7s`（约 `8.6` 分钟）、TQC 耗时 `516.2s`（约 `8.6` 分钟），`actual_gradient_updates = 19000`；推算 100,000 步单次正式训练约 `43` 分钟，6 次合计约 `4.3` GPU 小时（待与 P3 对齐确认最终 `total_timesteps` 与 3 个种子）
 - [x] 第 8 节候选阈值登记并提交（严守测试集隔离，未读取 `trade_data.csv` 策略表现）
-- [ ] 6 次正式训练完成，验证集选定并冻结 SAC / TQC 阈值（及 P3 简单门限）
-- [ ] P5 冻结选中模型后，执行 S0/S1/S2、T0/T1/T2 共 18 次测试回测
+- [x] 6 次正式训练完成（SAC/TQC × 种子 `42, 2024, 2026`，各 `100,000` 步），验证集选定并冻结 SAC / TQC Critic 阈值均为 `delta_threshold = 0.0`（详见 [P4 验证与冻结交接单](../handoffs/handoff_p4_sac_tqc_validation_v1.md)；简单门限待 P3 合入）
+- [ ] P5 冻结选中模型且 P3 合入简单门限后，执行 S0/S1/S2、T0/T1/T2 共 18 次测试回测
 
 ## 8. 候选阈值登记表（已按 20k Pilot 验证集 484 个决策日标定）
 

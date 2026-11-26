@@ -114,7 +114,7 @@ T05 回测入口应接收训练完成的 SB3 模型 `.zip` 路径和 `DATASETNAM
 
 - 现行项目计划：[docs/小组项目计划.md](docs/小组项目计划.md)（历史版本通过 Git 追溯）
 - 模块说明：[数据准备](docs/modules/module_data_sse48.md)、[训练模板](docs/modules/module_train_model.md)、[统一回测](docs/modules/module_backtest.md)、[等权基线](docs/modules/module_baselines_equal_weight.md)、[P4 实验方案](docs/modules/module_p4_sac_tqc.md)、[SAC 模块](docs/modules/module_p4_sac.md)、[TQC 模块](docs/modules/module_p4_tqc.md)
-- 接口契约：[P1 接口契约](docs/contracts/contract_p1_train_interface_v1.md)、[P1 与 P2 回测交接契约](docs/contracts/contract_p1_p2_backtest_v1.md)
+- 接口契约与交接：[P1 接口契约](docs/contracts/contract_p1_train_interface_v1.md)、[P1 与 P2 回测交接契约](docs/contracts/contract_p1_p2_backtest_v1.md)、[S0 基础联调交接单](docs/handoffs/handoff_s0_baseline_integration_v1.md)、[P4 训练与门限冻结交接单](docs/handoffs/handoff_p4_sac_tqc_validation_v1.md)
 - 上游 FinRL 文档：[docs/upstream/README_FinRL.md](docs/upstream/README_FinRL.md)、[官方文档站点](https://finrl.readthedocs.io/)
 
 ## 免责声明
