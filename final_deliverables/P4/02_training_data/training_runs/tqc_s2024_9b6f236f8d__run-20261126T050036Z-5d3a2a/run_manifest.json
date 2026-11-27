@@ -1,0 +1,167 @@
+{
+  "artifacts": {
+    "archive_metadata": "metadata.txt",
+    "manifest": "C:\\Users\\Haoyu Fan\\PycharmProjects\\FinRL\\RL_Agent_Stock_Trade\\results\\train_model\\sse48_baostock_v2\\tqc_s2024_9b6f236f8d__run-20261126T050036Z-5d3a2a\\run_manifest.json",
+    "model_zip": "C:\\Users\\Haoyu Fan\\PycharmProjects\\FinRL\\RL_Agent_Stock_Trade\\trained_models\\sse48_baostock_v2\\tqc\\tqc_s2024_t100k_lr0p0003_b256_buf100k_start1000_entauto0p1.zip",
+    "results_dir": "C:\\Users\\Haoyu Fan\\PycharmProjects\\FinRL\\RL_Agent_Stock_Trade\\results\\train_model\\sse48_baostock_v2\\tqc_s2024_9b6f236f8d__run-20261126T050036Z-5d3a2a",
+    "tensorboard_log_dir": "C:\\Users\\Haoyu Fan\\PycharmProjects\\FinRL\\RL_Agent_Stock_Trade\\tensorboard_log\\sse48_baostock_v2\\tqc\\tqc_s2024_9b6f236f8d__run-20261126T050036Z-5d3a2a",
+    "training_progress": "C:\\Users\\Haoyu Fan\\PycharmProjects\\FinRL\\RL_Agent_Stock_Trade\\tensorboard_log\\sse48_baostock_v2\\tqc\\tqc_s2024_9b6f236f8d__run-20261126T050036Z-5d3a2a\\progress.csv",
+    "validation_account_value": "C:\\Users\\Haoyu Fan\\PycharmProjects\\FinRL\\RL_Agent_Stock_Trade\\results\\train_model\\sse48_baostock_v2\\tqc_s2024_9b6f236f8d__run-20261126T050036Z-5d3a2a\\validation_account_value.csv",
+    "validation_actions": "C:\\Users\\Haoyu Fan\\PycharmProjects\\FinRL\\RL_Agent_Stock_Trade\\results\\train_model\\sse48_baostock_v2\\tqc_s2024_9b6f236f8d__run-20261126T050036Z-5d3a2a\\validation_actions.csv"
+  },
+  "completed_at_utc": "2026-11-26T05:27:54.485656+00:00",
+  "duration_seconds": 1637.957,
+  "effective_config": {
+    "actual_gradient_updates": 99000,
+    "actual_policy": "TQCPolicy",
+    "actual_timesteps": 100000,
+    "algorithm": "tqc",
+    "configuration_fingerprint": "9b6f236f8d",
+    "data_contract": {
+      "action_dimension": 48,
+      "environment_code_sha256": {
+        "finrl_environment": "78d0151edd4637299250e196b966d22715f2ebbfc335985606718d53c4b58d64",
+        "shared_environment": "1533394fc3ea7c295765df25b3782f676766537f6ec87922d681a19de6525ce9"
+      },
+      "execution_timing": "finrl_same_close",
+      "observation_dimension": 481,
+      "ordered_indicators": [
+        "macd",
+        "boll_ub",
+        "boll_lb",
+        "rsi_30",
+        "cci_30",
+        "dx_30",
+        "close_30_sma",
+        "close_60_sma"
+      ],
+      "ordered_tickers": [
+        "600000.SS",
+        "600010.SS",
+        "600015.SS",
+        "600016.SS",
+        "600018.SS",
+        "600028.SS",
+        "600030.SS",
+        "600036.SS",
+        "600048.SS",
+        "600050.SS",
+        "600104.SS",
+        "600109.SS",
+        "600111.SS",
+        "600150.SS",
+        "600518.SS",
+        "600519.SS",
+        "600585.SS",
+        "600637.SS",
+        "600795.SS",
+        "600887.SS",
+        "600893.SS",
+        "600958.SS",
+        "600999.SS",
+        "601006.SS",
+        "601088.SS",
+        "601166.SS",
+        "601169.SS",
+        "601186.SS",
+        "601211.SS",
+        "601288.SS",
+        "601318.SS",
+        "601328.SS",
+        "601336.SS",
+        "601390.SS",
+        "601398.SS",
+        "601601.SS",
+        "601628.SS",
+        "601668.SS",
+        "601669.SS",
+        "601688.SS",
+        "601766.SS",
+        "601800.SS",
+        "601818.SS",
+        "601857.SS",
+        "601901.SS",
+        "601985.SS",
+        "601988.SS",
+        "601998.SS"
+      ],
+      "price_basis": "adjusted_virtual_units",
+      "train_end": "2020-12-31",
+      "train_start": "2017-01-16",
+      "validation_end": "2022-12-30",
+      "validation_start": "2021-01-04"
+    },
+    "data_hashes": {
+      "train_csv": "ee0c2ec08cd9239b700315b0e1658bea433e5c6916ac77208afca93143fb7d89",
+      "val_csv": "2a4d08b68780019f93a398169378a75fa048a5a59e28b99586a2bea829d8bf4d"
+    },
+    "data_paths": {
+      "test_csv": "C:\\Users\\Haoyu Fan\\PycharmProjects\\FinRL\\RL_Agent_Stock_Trade\\datasets\\sse48_baostock_v2\\trade_data.csv",
+      "train_csv": "C:\\Users\\Haoyu Fan\\PycharmProjects\\FinRL\\RL_Agent_Stock_Trade\\datasets\\sse48_baostock_v2\\train_data.csv",
+      "val_csv": "C:\\Users\\Haoyu Fan\\PycharmProjects\\FinRL\\RL_Agent_Stock_Trade\\datasets\\sse48_baostock_v2\\val_data.csv"
+    },
+    "dataset_name": "sse48_baostock_v2",
+    "device": "cuda",
+    "environment": {
+      "buy_cost_pct": 0.001,
+      "hmax": 100,
+      "initial_amount": 1000000,
+      "price_basis": "adjusted_virtual_units",
+      "reward_scaling": 0.0001,
+      "risk_indicator_col": "turbulence",
+      "sell_cost_pct": 0.001,
+      "tech_indicator_list": [
+        "macd",
+        "boll_ub",
+        "boll_lb",
+        "rsi_30",
+        "cci_30",
+        "dx_30",
+        "close_30_sma",
+        "close_60_sma"
+      ],
+      "tradability_policy": "enforce_column",
+      "turbulence_threshold": null
+    },
+    "model_kwargs": {
+      "batch_size": 256,
+      "buffer_size": 100000,
+      "ent_coef": "auto_0.1",
+      "gamma": 0.99,
+      "gradient_steps": 1,
+      "learning_rate": 0.0003,
+      "learning_starts": 1000,
+      "policy_kwargs": {
+        "n_critics": 2,
+        "n_quantiles": 25,
+        "net_arch": [
+          256,
+          256
+        ]
+      },
+      "tau": 0.005,
+      "top_quantiles_to_drop_per_net": 2,
+      "train_freq": 1
+    },
+    "policy": "MlpPolicy",
+    "requested_timesteps": 100000,
+    "run_type": "main",
+    "seed": 2024,
+    "total_timesteps": 100000
+  },
+  "run_id": "tqc_s2024_9b6f236f8d__run-20261126T050036Z-5d3a2a",
+  "runtime": {
+    "git_revision": "2e76234cfae5ae87114066f3820eb107c92e6522",
+    "packages": {
+      "finrl": "0.3.8",
+      "pandas": "2.2.3",
+      "sb3-contrib": "2.7.1",
+      "stable-baselines3": "2.7.1",
+      "torch": "2.8.0+cu126"
+    },
+    "platform": "Windows-10-10.0.22631-SP0",
+    "python": "3.9.13"
+  },
+  "started_at_utc": "2026-11-26T05:00:36.453095+00:00",
+  "status": "completed"
+}

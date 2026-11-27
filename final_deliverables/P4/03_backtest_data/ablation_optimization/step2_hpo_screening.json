@@ -1,0 +1,456 @@
+[
+  {
+    "candidate_id": "C0_baseline_20k",
+    "description": "Baseline (drop=2, gamma=0.99, lr=3e-4, ent=auto_0.1)",
+    "overrides": {},
+    "none_metrics": {
+      "seed": 42,
+      "total_return": -0.1945818556495782,
+      "annual_volatility": 0.19553944274378657,
+      "max_drawdown": -0.29268671967338,
+      "sharpe": -0.47840236728775754,
+      "trade_count": 23206,
+      "rejection_rate": 0.0,
+      "mean_exposure": 0.9880031909600542,
+      "final_value": 805418.1443504218
+    },
+    "best_threshold_metrics": {
+      "tag": "p25",
+      "thr": 1.4053,
+      "seed": 42,
+      "total_return": -0.04848908046521816,
+      "annual_volatility": 0.1819670035897445,
+      "max_drawdown": -0.24062501559324645,
+      "sharpe": -0.05139301769676038,
+      "trade_count": 2160,
+      "rejection_rate": 0.9070247933884298,
+      "mean_exposure": 0.8402671103326607,
+      "final_value": 951510.9195347818
+    },
+    "all_thresholds": [
+      {
+        "tag": "d0",
+        "thr": 0.0,
+        "seed": 42,
+        "total_return": -0.1859839405909831,
+        "annual_volatility": 0.19528632322042785,
+        "max_drawdown": -0.2880936054319425,
+        "sharpe": -0.4509760989462744,
+        "trade_count": 22667,
+        "rejection_rate": 0.022727272727272728,
+        "mean_exposure": 0.9846699924830219,
+        "final_value": 814016.0594090169
+      },
+      {
+        "tag": "p25",
+        "thr": 1.4053,
+        "seed": 42,
+        "total_return": -0.04848908046521816,
+        "annual_volatility": 0.1819670035897445,
+        "max_drawdown": -0.24062501559324645,
+        "sharpe": -0.05139301769676038,
+        "trade_count": 2160,
+        "rejection_rate": 0.9070247933884298,
+        "mean_exposure": 0.8402671103326607,
+        "final_value": 951510.9195347818
+      },
+      {
+        "tag": "p50",
+        "thr": 1.8686,
+        "seed": 42,
+        "total_return": -0.06579135682626858,
+        "annual_volatility": 0.1915483166752005,
+        "max_drawdown": -0.2472377669315161,
+        "sharpe": -0.08932853848586313,
+        "trade_count": 1871,
+        "rejection_rate": 0.9194214876033058,
+        "mean_exposure": 0.8785001590734276,
+        "final_value": 934208.6431737314
+      },
+      {
+        "tag": "p75",
+        "thr": 2.1022,
+        "seed": 42,
+        "total_return": -0.09913476029470625,
+        "annual_volatility": 0.26101965479522693,
+        "max_drawdown": -0.36991022402998597,
+        "sharpe": -0.07817074388463313,
+        "trade_count": 384,
+        "rejection_rate": 0.9834710743801653,
+        "mean_exposure": 0.9662006022657962,
+        "final_value": 900865.2397052938
+      }
+    ]
+  },
+  {
+    "candidate_id": "C1_pessimistic_drop6",
+    "description": "Stronger TQC upper-tail truncation (top_quantiles_to_drop_per_net=6)",
+    "overrides": {
+      "top_quantiles_to_drop_per_net": 6
+    },
+    "elapsed_sec": 462.63,
+    "model_path": "C:\\Users\\Haoyu Fan\\PycharmProjects\\FinRL\\RL_Agent_Stock_Trade\\results\\p4_optimization\\models\\C1_pessimistic_drop6\\sse48_baostock_v2\\tqc\\tqc_s42_t20k_lr0p0003_b256_buf100k_start1000_entauto0p1.zip",
+    "delta_quantiles": {
+      "p25": 10.911791801452637,
+      "p50": 12.49951457977295,
+      "p75": 14.381580352783203
+    },
+    "none_metrics": {
+      "seed": 42,
+      "total_return": -0.14405749674261392,
+      "annual_volatility": 0.30299253737193976,
+      "max_drawdown": -0.4377415484740025,
+      "sharpe": -0.11619427578214418,
+      "trade_count": 23232,
+      "rejection_rate": 0.0,
+      "mean_exposure": 0.9970250025645497,
+      "final_value": 855942.503257386
+    },
+    "best_threshold_metrics": {
+      "tag": "d0",
+      "thr": 0.0,
+      "seed": 42,
+      "total_return": -0.14405749674261392,
+      "annual_volatility": 0.30299253737193976,
+      "max_drawdown": -0.4377415484740025,
+      "sharpe": -0.11619427578214418,
+      "trade_count": 23232,
+      "rejection_rate": 0.0,
+      "mean_exposure": 0.9970250025645497,
+      "final_value": 855942.503257386
+    },
+    "all_thresholds": [
+      {
+        "tag": "d0",
+        "thr": 0.0,
+        "seed": 42,
+        "total_return": -0.14405749674261392,
+        "annual_volatility": 0.30299253737193976,
+        "max_drawdown": -0.4377415484740025,
+        "sharpe": -0.11619427578214418,
+        "trade_count": 23232,
+        "rejection_rate": 0.0,
+        "mean_exposure": 0.9970250025645497,
+        "final_value": 855942.503257386
+      },
+      {
+        "tag": "p25",
+        "thr": 10.9118,
+        "seed": 42,
+        "total_return": -0.14405749674261392,
+        "annual_volatility": 0.30299253737193976,
+        "max_drawdown": -0.4377415484740025,
+        "sharpe": -0.11619427578214418,
+        "trade_count": 17424,
+        "rejection_rate": 0.25,
+        "mean_exposure": 0.9970250025645497,
+        "final_value": 855942.503257386
+      },
+      {
+        "tag": "p50",
+        "thr": 12.4995,
+        "seed": 42,
+        "total_return": -0.14405749674261392,
+        "annual_volatility": 0.30299253737193976,
+        "max_drawdown": -0.4377415484740025,
+        "sharpe": -0.11619427578214418,
+        "trade_count": 11616,
+        "rejection_rate": 0.5,
+        "mean_exposure": 0.9970250025645497,
+        "final_value": 855942.503257386
+      },
+      {
+        "tag": "p75",
+        "thr": 14.3816,
+        "seed": 42,
+        "total_return": -0.13930970944628018,
+        "annual_volatility": 0.2873064565659265,
+        "max_drawdown": -0.3860742102318534,
+        "sharpe": -0.12864293768518917,
+        "trade_count": 5088,
+        "rejection_rate": 0.78099173553719,
+        "mean_exposure": 0.9638103507012228,
+        "final_value": 860690.2905537199
+      }
+    ]
+  },
+  {
+    "candidate_id": "C2_short_horizon_g095",
+    "description": "Shorter discount horizon + moderate pessimism (gamma=0.95, drop=4)",
+    "overrides": {
+      "gamma": 0.95,
+      "top_quantiles_to_drop_per_net": 4
+    },
+    "elapsed_sec": 359.74,
+    "model_path": "C:\\Users\\Haoyu Fan\\PycharmProjects\\FinRL\\RL_Agent_Stock_Trade\\results\\p4_optimization\\models\\C2_short_horizon_g095\\sse48_baostock_v2\\tqc\\tqc_s42_t20k_lr0p0003_b256_buf100k_start1000_entauto0p1.zip",
+    "delta_quantiles": {
+      "p25": 0.04168117046356201,
+      "p50": 0.1534806489944458,
+      "p75": 0.38182663917541504
+    },
+    "none_metrics": {
+      "seed": 42,
+      "total_return": -0.2233216359314898,
+      "annual_volatility": 0.21182586066424866,
+      "max_drawdown": -0.3793856541943902,
+      "sharpe": -0.515146520217862,
+      "trade_count": 23145,
+      "rejection_rate": 0.0,
+      "mean_exposure": 0.9961458211494424,
+      "final_value": 776678.3640685102
+    },
+    "best_threshold_metrics": {
+      "tag": "p25",
+      "thr": 0.0417,
+      "seed": 42,
+      "total_return": -0.21747163199989406,
+      "annual_volatility": 0.21102282240883716,
+      "max_drawdown": -0.37348619435936914,
+      "sharpe": -0.49939885259984157,
+      "trade_count": 19020,
+      "rejection_rate": 0.17768595041322313,
+      "mean_exposure": 0.9954610125452221,
+      "final_value": 782528.368000106
+    },
+    "all_thresholds": [
+      {
+        "tag": "d0",
+        "thr": 0.0,
+        "seed": 42,
+        "total_return": -0.22252031357227875,
+        "annual_volatility": 0.2114064082965212,
+        "max_drawdown": -0.37922884959943326,
+        "sharpe": -0.514047105892224,
+        "trade_count": 20743,
+        "rejection_rate": 0.10330578512396695,
+        "mean_exposure": 0.9960480358738993,
+        "final_value": 777479.6864277213
+      },
+      {
+        "tag": "p25",
+        "thr": 0.0417,
+        "seed": 42,
+        "total_return": -0.21747163199989406,
+        "annual_volatility": 0.21102282240883716,
+        "max_drawdown": -0.37348619435936914,
+        "sharpe": -0.49939885259984157,
+        "trade_count": 19020,
+        "rejection_rate": 0.17768595041322313,
+        "mean_exposure": 0.9954610125452221,
+        "final_value": 782528.368000106
+      },
+      {
+        "tag": "p50",
+        "thr": 0.1535,
+        "seed": 42,
+        "total_return": 0.0,
+        "annual_volatility": 0.0,
+        "max_drawdown": 0.0,
+        "sharpe": null,
+        "trade_count": 0,
+        "rejection_rate": 1.0,
+        "mean_exposure": 0.0,
+        "final_value": 1000000.0
+      },
+      {
+        "tag": "p75",
+        "thr": 0.3818,
+        "seed": 42,
+        "total_return": 0.0,
+        "annual_volatility": 0.0,
+        "max_drawdown": 0.0,
+        "sharpe": null,
+        "trade_count": 0,
+        "rejection_rate": 1.0,
+        "mean_exposure": 0.0,
+        "final_value": 1000000.0
+      }
+    ]
+  },
+  {
+    "candidate_id": "C3_low_lr_drop5",
+    "description": "Conservative learning rate + pessimistic truncation (lr=1e-4, drop=5)",
+    "overrides": {
+      "learning_rate": 0.0001,
+      "top_quantiles_to_drop_per_net": 5
+    },
+    "elapsed_sec": 372.43,
+    "model_path": "C:\\Users\\Haoyu Fan\\PycharmProjects\\FinRL\\RL_Agent_Stock_Trade\\results\\p4_optimization\\models\\C3_low_lr_drop5\\sse48_baostock_v2\\tqc\\tqc_s42_t20k_lr0p0001_b256_buf100k_start1000_entauto0p1.zip",
+    "delta_quantiles": {
+      "p25": 13.067939758300781,
+      "p50": 14.725341796875,
+      "p75": 18.925262451171875
+    },
+    "none_metrics": {
+      "seed": 42,
+      "total_return": -0.13577100784316198,
+      "annual_volatility": 0.2965418781679455,
+      "max_drawdown": -0.4307760738001797,
+      "sharpe": -0.10826992725706389,
+      "trade_count": 23053,
+      "rejection_rate": 0.0,
+      "mean_exposure": 0.9972008908898807,
+      "final_value": 864228.9921568381
+    },
+    "best_threshold_metrics": {
+      "tag": "p25",
+      "thr": 13.0679,
+      "seed": 42,
+      "total_return": -0.13572170827604657,
+      "annual_volatility": 0.2965384858921255,
+      "max_drawdown": -0.4307320290829414,
+      "sharpe": -0.10817438996490857,
+      "trade_count": 17071,
+      "rejection_rate": 0.25826446280991733,
+      "mean_exposure": 0.9972006208294584,
+      "final_value": 864278.2917239534
+    },
+    "all_thresholds": [
+      {
+        "tag": "d0",
+        "thr": 0.0,
+        "seed": 42,
+        "total_return": -0.13577100784316198,
+        "annual_volatility": 0.2965418781679455,
+        "max_drawdown": -0.4307760738001797,
+        "sharpe": -0.10826992725706389,
+        "trade_count": 23053,
+        "rejection_rate": 0.0,
+        "mean_exposure": 0.9972008908898807,
+        "final_value": 864228.9921568381
+      },
+      {
+        "tag": "p25",
+        "thr": 13.0679,
+        "seed": 42,
+        "total_return": -0.13572170827604657,
+        "annual_volatility": 0.2965384858921255,
+        "max_drawdown": -0.4307320290829414,
+        "sharpe": -0.10817438996490857,
+        "trade_count": 17071,
+        "rejection_rate": 0.25826446280991733,
+        "mean_exposure": 0.9972006208294584,
+        "final_value": 864278.2917239534
+      },
+      {
+        "tag": "p50",
+        "thr": 14.7253,
+        "seed": 42,
+        "total_return": -0.13593573862912034,
+        "annual_volatility": 0.29657354738973285,
+        "max_drawdown": -0.43090921128656345,
+        "sharpe": -0.10856166415712541,
+        "trade_count": 13165,
+        "rejection_rate": 0.42768595041322316,
+        "mean_exposure": 0.9972005514256483,
+        "final_value": 864064.2613708797
+      },
+      {
+        "tag": "p75",
+        "thr": 18.9253,
+        "seed": 42,
+        "total_return": -0.1394508952289828,
+        "annual_volatility": 0.29707720119747727,
+        "max_drawdown": -0.43337657411368624,
+        "sharpe": -0.11502385852802365,
+        "trade_count": 7053,
+        "rejection_rate": 0.6942148760330579,
+        "mean_exposure": 0.9972006843063888,
+        "final_value": 860549.1047710172
+      }
+    ]
+  },
+  {
+    "candidate_id": "C4_fixed_ent_drop4",
+    "description": "Fixed mild entropy regularization + pessimistic truncation (ent_coef=0.005, drop=4)",
+    "overrides": {
+      "ent_coef": 0.005,
+      "top_quantiles_to_drop_per_net": 4
+    },
+    "elapsed_sec": 511.93,
+    "model_path": "C:\\Users\\Haoyu Fan\\PycharmProjects\\FinRL\\RL_Agent_Stock_Trade\\results\\p4_optimization\\models\\C4_fixed_ent_drop4\\sse48_baostock_v2\\tqc\\tqc_s42_t20k_lr0p0003_b256_buf100k_start1000_ent0p005.zip",
+    "delta_quantiles": {
+      "p25": 3.1704092621803284,
+      "p50": 3.6929075717926025,
+      "p75": 4.374042510986328
+    },
+    "none_metrics": {
+      "seed": 42,
+      "total_return": -0.11218751294306584,
+      "annual_volatility": 0.24512807788253443,
+      "max_drawdown": -0.34778413307544565,
+      "sharpe": -0.1303587786197746,
+      "trade_count": 23190,
+      "rejection_rate": 0.0,
+      "mean_exposure": 0.9966526375596253,
+      "final_value": 887812.4870569342
+    },
+    "best_threshold_metrics": {
+      "tag": "d0",
+      "thr": 0.0,
+      "seed": 42,
+      "total_return": -0.11218751294306584,
+      "annual_volatility": 0.24512807788253443,
+      "max_drawdown": -0.34778413307544565,
+      "sharpe": -0.1303587786197746,
+      "trade_count": 23190,
+      "rejection_rate": 0.0,
+      "mean_exposure": 0.9966526375596253,
+      "final_value": 887812.4870569342
+    },
+    "all_thresholds": [
+      {
+        "tag": "d0",
+        "thr": 0.0,
+        "seed": 42,
+        "total_return": -0.11218751294306584,
+        "annual_volatility": 0.24512807788253443,
+        "max_drawdown": -0.34778413307544565,
+        "sharpe": -0.1303587786197746,
+        "trade_count": 23190,
+        "rejection_rate": 0.0,
+        "mean_exposure": 0.9966526375596253,
+        "final_value": 887812.4870569342
+      },
+      {
+        "tag": "p25",
+        "thr": 3.1704,
+        "seed": 42,
+        "total_return": -0.11361527970079677,
+        "annual_volatility": 0.24483479516320178,
+        "max_drawdown": -0.34854237182216374,
+        "sharpe": -0.13422590817601324,
+        "trade_count": 17441,
+        "rejection_rate": 0.24793388429752067,
+        "mean_exposure": 0.9966532459349798,
+        "final_value": 886384.7202992032
+      },
+      {
+        "tag": "p50",
+        "thr": 3.6929,
+        "seed": 42,
+        "total_return": -0.11702649762349782,
+        "annual_volatility": 0.24474918598839152,
+        "max_drawdown": -0.35183153371553755,
+        "sharpe": -0.14255872463989344,
+        "trade_count": 12173,
+        "rejection_rate": 0.47520661157024796,
+        "mean_exposure": 0.9966532514688246,
+        "final_value": 882973.5023765021
+      },
+      {
+        "tag": "p75",
+        "thr": 4.374,
+        "seed": 42,
+        "total_return": -0.12219295303080902,
+        "annual_volatility": 0.2555665652561124,
+        "max_drawdown": -0.36943308295895727,
+        "sharpe": -0.13794296843993706,
+        "trade_count": 7377,
+        "rejection_rate": 0.6818181818181818,
+        "mean_exposure": 0.9969018085468363,
+        "final_value": 877807.0469691909
+      }
+    ]
+  }
+]

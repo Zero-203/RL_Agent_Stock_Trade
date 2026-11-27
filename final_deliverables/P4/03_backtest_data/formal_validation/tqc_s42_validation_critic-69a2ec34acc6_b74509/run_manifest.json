@@ -1,0 +1,163 @@
+{
+  "status": "completed",
+  "started_at_utc": "2026-11-26T06:26:56.502150+00:00",
+  "algorithm": "tqc",
+  "seed": 42,
+  "split": "validation",
+  "model_training_run_type": "main",
+  "ordered_tickers": [
+    "600000.SS",
+    "600010.SS",
+    "600015.SS",
+    "600016.SS",
+    "600018.SS",
+    "600028.SS",
+    "600030.SS",
+    "600036.SS",
+    "600048.SS",
+    "600050.SS",
+    "600104.SS",
+    "600109.SS",
+    "600111.SS",
+    "600150.SS",
+    "600518.SS",
+    "600519.SS",
+    "600585.SS",
+    "600637.SS",
+    "600795.SS",
+    "600887.SS",
+    "600893.SS",
+    "600958.SS",
+    "600999.SS",
+    "601006.SS",
+    "601088.SS",
+    "601166.SS",
+    "601169.SS",
+    "601186.SS",
+    "601211.SS",
+    "601288.SS",
+    "601318.SS",
+    "601328.SS",
+    "601336.SS",
+    "601390.SS",
+    "601398.SS",
+    "601601.SS",
+    "601628.SS",
+    "601668.SS",
+    "601669.SS",
+    "601688.SS",
+    "601766.SS",
+    "601800.SS",
+    "601818.SS",
+    "601857.SS",
+    "601901.SS",
+    "601985.SS",
+    "601988.SS",
+    "601998.SS"
+  ],
+  "environment": {
+    "buy_cost_pct": 0.001,
+    "hmax": 100,
+    "initial_amount": 1000000,
+    "price_basis": "adjusted_virtual_units",
+    "reward_scaling": 0.0001,
+    "risk_indicator_col": "turbulence",
+    "sell_cost_pct": 0.001,
+    "tech_indicator_list": [
+      "macd",
+      "boll_ub",
+      "boll_lb",
+      "rsi_30",
+      "cci_30",
+      "dx_30",
+      "close_30_sma",
+      "close_60_sma"
+    ],
+    "tradability_policy": "enforce_column",
+    "turbulence_threshold": null
+  },
+  "environment_code_sha256": {
+    "shared_environment": "1533394fc3ea7c295765df25b3782f676766537f6ec87922d681a19de6525ce9",
+    "finrl_environment": "78d0151edd4637299250e196b966d22715f2ebbfc335985606718d53c4b58d64"
+  },
+  "input_sha256": {
+    "model": "c24f16a68b6bba261a074cdebc63b73ef33afb2a3856b100e7f6bfdf0a4b1b23",
+    "data": "2a4d08b68780019f93a398169378a75fa048a5a59e28b99586a2bea829d8bf4d",
+    "market_index": "8e667f017273c3831b6750aa202f03ca8d5ebd0a258253dbdd4276603f52a14b",
+    "baseline_equal_weight": "e5065fc2087f992a912d04c8171b153f78c0c9d64da4e5a6cbb8b5d26dd98510"
+  },
+  "framework_code_sha256": {
+    "data.py": "1709455c8817c398b2b5ce8c394f15ce723f6656ec1aea6dea53e3c9331e02f5",
+    "metrics.py": "2449484112f31a4718ae67f76883c4aecbf71b5c822d9b402186e658813d4c6a",
+    "runner.py": "96f432b9a399b6a390b9747acfe269048354d014cb503cf45089e1dd1456b76e",
+    "__init__.py": "7152ddffe0d919cc5d0656c701a6c4ff50fe07f22d735df01ce6772e28318142"
+  },
+  "threshold_code_sha256": {
+    "backtest/runner.py": "96f432b9a399b6a390b9747acfe269048354d014cb503cf45089e1dd1456b76e",
+    "thresholds/__init__.py": "cc11af757342c6229cc22b95ec2bb7474069c6a5d5881ae8fcebeaa62db0a759",
+    "thresholds/critic.py": "6e3accb0dcec39d8908b80caf1492ca8dd2795e8b1d698dc1386fe9676983d70",
+    "thresholds/selection.py": "6e7d9dadf83b95f05cd685d6f0f84ecf0dba16e413c6aa73bbe21902c3aba997"
+  },
+  "model_path": "C:\\Users\\Haoyu Fan\\PycharmProjects\\FinRL\\RL_Agent_Stock_Trade\\trained_models\\sse48_baostock_v2\\tqc\\tqc_s42_t100k_lr0p0003_b256_buf100k_start1000_entauto0p1.zip",
+  "data_path": "C:\\Users\\Haoyu Fan\\PycharmProjects\\FinRL\\RL_Agent_Stock_Trade\\datasets\\sse48_baostock_v2\\val_data.csv",
+  "output": "C:\\Users\\Haoyu Fan\\PycharmProjects\\FinRL\\RL_Agent_Stock_Trade\\results\\backtest\\p4_formal_validation\\tqc_s42_validation_critic-69a2ec34acc6_b74509",
+  "deterministic": true,
+  "execution_timing": "FinRL same-close action at t, mark-to-market at t+1; simplified execution, not an executable next-open claim",
+  "inference_replay_buffer_size": 1,
+  "threshold_contract_version": "p2-v1",
+  "threshold_mode": "critic",
+  "threshold_config": {
+    "delta_threshold": 1.4,
+    "rule": "critic_delta_v1",
+    "summary": "truncated_quantile_mean"
+  },
+  "threshold_implementation_sha256": "8b16ca4cc142f223781ffaccd92784f4288dcccce3a4e38645dc2d93be2d0d74",
+  "threshold_condition_sha256": "69a2ec34acc6bb6cddf0170ac8dedd5caa596682ec524e58b7c8407885744889",
+  "threshold_condition_id": "critic-69a2ec34acc6",
+  "price_basis": "adjusted_virtual_units",
+  "corporate_actions_paid_separately": false,
+  "annualization": 252,
+  "risk_free_rate": 0.0,
+  "legacy_metadata_inferred": false,
+  "runtime": {
+    "python": "3.9.13",
+    "packages": {
+      "numpy": "2.0.2",
+      "pandas": "2.2.3",
+      "stable-baselines3": "2.7.1",
+      "sb3-contrib": "2.7.1",
+      "torch": "2.8.0+cu126"
+    }
+  },
+  "limitations": [
+    "Adjusted virtual units, no separate dividend/split/merger settlement.",
+    "T+1, price limits, real lots, slippage and queue priority are not modeled.",
+    "Same-close execution can be optimistic; do not describe as a causally executable trading system.",
+    "Market index is a price-index reference without dividend reinvestment or transaction costs.",
+    "Regime summary compounds attributed daily returns across noncontiguous days; it is not a separate continuous strategy."
+  ],
+  "completed_at_utc": "2026-11-26T06:27:00.034501+00:00",
+  "dates": {
+    "start": "2021-01-04",
+    "end": "2022-12-30",
+    "observations": 485
+  },
+  "checks": {
+    "cash_fee_reward_reconciliation": true,
+    "masks_enforced_when_configured": true,
+    "all_dates_replayed": true,
+    "model_and_data_unchanged": true
+  },
+  "output_sha256": {
+    "account_value.csv": "74c01982d80c7b88a8c83a6b675aecb497b4c38fec1934ad0ffe2349c0321574",
+    "actions.csv": "0506907bf77391d063cc5df920c1f518d18cbcdb6074ede670fcf7867966d011",
+    "drawdown.png": "f3bbf6b8f059cd8155121e38ca6961c8b017e012002cdb40d2214a1520011030",
+    "equity_curve.png": "c855f7f08beaf7c94bd341669b513ee6c9c5138bad59757cdbd36726f2bdc4e8",
+    "holdings.csv": "c0a4a3ce2899de95c9a2bf86070dff9a4ac8188400cbaf4798ad656583d0d967",
+    "metrics.json": "3619622afbf27f5185f6658b41ba9b02e1048cf4bc1732a79b7c3e109e33efa7",
+    "model_metadata.json": "c5e44451c1f259146fc0430f27d70e0ae57f70315eef8da8c5ce0b19f8bbe6b1",
+    "normalized_curves.csv": "81573d8650385125cda58931dd316f2650477c0b87a3bd30b9fd173e8439b853",
+    "regime_metrics.csv": "44067f8d71411dec07c87a34d43b4dff61a01aeaa4246191814a3f25eafe6ec6",
+    "trades.csv": "514258f76c819235e59f23f2705a912bc9c874dddb58d23676beaf1c88f00717"
+  }
+}

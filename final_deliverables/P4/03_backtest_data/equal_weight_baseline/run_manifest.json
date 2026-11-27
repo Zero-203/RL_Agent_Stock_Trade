@@ -1,0 +1,103 @@
+{
+  "status": "completed",
+  "strategy": "equal_weight_buy_and_hold",
+  "completed_at_utc": "2026-11-26T01:42:39.554568+00:00",
+  "split": "validation",
+  "data_path": "C:\\Users\\Haoyu Fan\\PycharmProjects\\FinRL\\RL_Agent_Stock_Trade\\datasets\\sse48_baostock_v2\\val_data.csv",
+  "output": "C:\\Users\\Haoyu Fan\\PycharmProjects\\FinRL\\RL_Agent_Stock_Trade\\results\\baselines\\sse48_val_equal_weight",
+  "account_value_csv": "C:\\Users\\Haoyu Fan\\PycharmProjects\\FinRL\\RL_Agent_Stock_Trade\\results\\baselines\\sse48_val_equal_weight\\account_value.csv",
+  "ordered_tickers": [
+    "600000.SS",
+    "600010.SS",
+    "600015.SS",
+    "600016.SS",
+    "600018.SS",
+    "600028.SS",
+    "600030.SS",
+    "600036.SS",
+    "600048.SS",
+    "600050.SS",
+    "600104.SS",
+    "600109.SS",
+    "600111.SS",
+    "600150.SS",
+    "600518.SS",
+    "600519.SS",
+    "600585.SS",
+    "600637.SS",
+    "600795.SS",
+    "600887.SS",
+    "600893.SS",
+    "600958.SS",
+    "600999.SS",
+    "601006.SS",
+    "601088.SS",
+    "601166.SS",
+    "601169.SS",
+    "601186.SS",
+    "601211.SS",
+    "601288.SS",
+    "601318.SS",
+    "601328.SS",
+    "601336.SS",
+    "601390.SS",
+    "601398.SS",
+    "601601.SS",
+    "601628.SS",
+    "601668.SS",
+    "601669.SS",
+    "601688.SS",
+    "601766.SS",
+    "601800.SS",
+    "601818.SS",
+    "601857.SS",
+    "601901.SS",
+    "601985.SS",
+    "601988.SS",
+    "601998.SS"
+  ],
+  "dates": {
+    "start": "2021-01-04",
+    "end": "2022-12-30",
+    "observations": 485
+  },
+  "config": {
+    "initial_amount": 1000000.0,
+    "buy_cost_pct": 0.001,
+    "tradability_policy": "enforce_column",
+    "suspension_policy": "defer_reserved_cash",
+    "unit_mode": "integer_virtual_units",
+    "price_basis": "adjusted_virtual_units",
+    "risk_indicator_col": "turbulence",
+    "tech_indicator_list": [
+      "macd",
+      "boll_ub",
+      "boll_lb",
+      "rsi_30",
+      "cci_30",
+      "dx_30",
+      "close_30_sma",
+      "close_60_sma"
+    ],
+    "annualization": 252,
+    "risk_free_rate": 0.0
+  },
+  "input_sha256": {
+    "data": "2a4d08b68780019f93a398169378a75fa048a5a59e28b99586a2bea829d8bf4d",
+    "market_index": "8e667f017273c3831b6750aa202f03ca8d5ebd0a258253dbdd4276603f52a14b"
+  },
+  "baseline_code_sha256": {
+    "baselines/equal_weight.py": "6f0315e285eb2f3cf4044a43416503e1ed30bfb406ee7eba7c8c909c48240913"
+  },
+  "output_sha256": {
+    "account_value.csv": "e5065fc2087f992a912d04c8171b153f78c0c9d64da4e5a6cbb8b5d26dd98510",
+    "holdings.csv": "e65b6c6e8280a5d25a2f425aede614c7a8b6443e73783470d17a5917d8bc0ff4",
+    "metrics.json": "114ce6b72bd977e746cfd86cc2e658064d064d7bee1000b9bf3cc0b7f2bc21aa",
+    "normalized_curves.csv": "1b0794522b09f16c363695e980a9475c3e43bdf29577fc7d2be53a0ab1295ae3",
+    "regime_metrics.csv": "0c4df7b108d091be15b8b7b362351ed08b6269339436a11366897e7926173a51",
+    "trades.csv": "22b3d6fd426331abbf4794e1d6c38a61cbc2876871ef4533e41df1ef1f3daaf6"
+  },
+  "runtime": {
+    "python": "3.9.13"
+  }
+}

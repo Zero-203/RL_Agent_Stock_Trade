@@ -1,0 +1,1128 @@
+{
+  "truncated_quantile_mean": {
+    "best": {
+      "delta_threshold": 0.22,
+      "valid_3_of_3": true,
+      "mean_sharpe": -0.07218778375894985,
+      "std_sharpe": 0.00980006976079309,
+      "mean_return": -0.0716867815062695,
+      "mean_mdd": -0.29747832661161194,
+      "per_seed": [
+        {
+          "seed": 42,
+          "total_return": -0.12783706804120276,
+          "annual_volatility": 0.3132588202587819,
+          "max_drawdown": -0.4370857932949408,
+          "sharpe": -0.07114853671689965,
+          "trade_count": 23051,
+          "rejection_rate": 0.006198347107438017,
+          "mean_exposure": 0.9970659471874308,
+          "final_value": 872162.9319587973
+        },
+        {
+          "seed": 2024,
+          "total_return": -0.014755766439936147,
+          "annual_volatility": 0.07654081177690483,
+          "max_drawdown": -0.13353136891923822,
+          "sharpe": -0.062948752582446,
+          "trade_count": 96,
+          "rejection_rate": 0.9958677685950413,
+          "mean_exposure": 0.25696433409289465,
+          "final_value": 985244.2335600639
+        },
+        {
+          "seed": 2026,
+          "total_return": -0.0724675100376696,
+          "annual_volatility": 0.20952674134420682,
+          "max_drawdown": -0.32181781762065687,
+          "sharpe": -0.08246606197750388,
+          "trade_count": 10752,
+          "rejection_rate": 0.5371900826446281,
+          "mean_exposure": 0.611212690898175,
+          "final_value": 927532.4899623304
+        }
+      ]
+    },
+    "rows": [
+      {
+        "delta_threshold": 0.14,
+        "valid_3_of_3": true,
+        "mean_sharpe": -0.11093010419718285,
+        "std_sharpe": 0.03336353880337203,
+        "mean_return": -0.13946659650797558,
+        "mean_mdd": -0.42572185923512884,
+        "per_seed": [
+          {
+            "seed": 42,
+            "total_return": -0.12900334143161007,
+            "annual_volatility": 0.3139573393801891,
+            "max_drawdown": -0.43838483177175624,
+            "sharpe": -0.07252122226230334,
+            "trade_count": 23055,
+            "rejection_rate": 0.006198347107438017,
+            "mean_exposure": 0.9970655921185173,
+            "final_value": 870996.65856839
+          },
+          {
+            "seed": 2024,
+            "total_return": -0.153470018150888,
+            "annual_volatility": 0.30472378482062623,
+            "max_drawdown": -0.4521612565902383,
+            "sharpe": -0.13272183387454184,
+            "trade_count": 22645,
+            "rejection_rate": 0.024793388429752067,
+            "mean_exposure": 0.9852702754209901,
+            "final_value": 846529.981849112
+          },
+          {
+            "seed": 2026,
+            "total_return": -0.13592642994142867,
+            "annual_volatility": 0.2832004418509955,
+            "max_drawdown": -0.38661948934339196,
+            "sharpe": -0.12754725645470338,
+            "trade_count": 21216,
+            "rejection_rate": 0.08677685950413223,
+            "mean_exposure": 0.933769681657538,
+            "final_value": 864073.5700585713
+          }
+        ]
+      },
+      {
+        "delta_threshold": 0.16,
+        "valid_3_of_3": true,
+        "mean_sharpe": -0.11872897470490175,
+        "std_sharpe": 0.042070203234116664,
+        "mean_return": -0.1428431680993342,
+        "mean_mdd": -0.4262251613565599,
+        "per_seed": [
+          {
+            "seed": 42,
+            "total_return": -0.12900334143161007,
+            "annual_volatility": 0.3139573393801891,
+            "max_drawdown": -0.43838483177175624,
+            "sharpe": -0.07252122226230334,
+            "trade_count": 23007,
+            "rejection_rate": 0.008264462809917356,
+            "mean_exposure": 0.9970655921185173,
+            "final_value": 870996.65856839
+          },
+          {
+            "seed": 2024,
+            "total_return": -0.1506450481337781,
+            "annual_volatility": 0.3034365151321387,
+            "max_drawdown": -0.45224362883664737,
+            "sharpe": -0.1288507589987597,
+            "trade_count": 22356,
+            "rejection_rate": 0.0371900826446281,
+            "mean_exposure": 0.9804532975803428,
+            "final_value": 849354.9518662218
+          },
+          {
+            "seed": 2026,
+            "total_return": -0.14888111473261445,
+            "annual_volatility": 0.28352038840389243,
+            "max_drawdown": -0.3880470234612762,
+            "sharpe": -0.15481494285364222,
+            "trade_count": 20352,
+            "rejection_rate": 0.12396694214876033,
+            "mean_exposure": 0.9239925988918696,
+            "final_value": 851118.8852673855
+          }
+        ]
+      },
+      {
+        "delta_threshold": 0.18,
+        "valid_3_of_3": true,
+        "mean_sharpe": -0.09863550136311476,
+        "std_sharpe": 0.034572695834935135,
+        "mean_return": -0.11436915940864308,
+        "mean_mdd": -0.38790902340792827,
+        "per_seed": [
+          {
+            "seed": 42,
+            "total_return": -0.12900334143161007,
+            "annual_volatility": 0.3139573393801891,
+            "max_drawdown": -0.43838483177175624,
+            "sharpe": -0.07252122226230334,
+            "trade_count": 23007,
+            "rejection_rate": 0.008264462809917356,
+            "mean_exposure": 0.9970655921185173,
+            "final_value": 870996.65856839
+          },
+          {
+            "seed": 2024,
+            "total_return": -0.14006825292718728,
+            "annual_volatility": 0.2821704106671112,
+            "max_drawdown": -0.3967186336507693,
+            "sharpe": -0.13784229899118247,
+            "trade_count": 19767,
+            "rejection_rate": 0.1487603305785124,
+            "mean_exposure": 0.9271560264603922,
+            "final_value": 859931.7470728128
+          },
+          {
+            "seed": 2026,
+            "total_return": -0.07403588386713189,
+            "annual_volatility": 0.21031013870954438,
+            "max_drawdown": -0.3286236048012593,
+            "sharpe": -0.08554298283585843,
+            "trade_count": 11184,
+            "rejection_rate": 0.518595041322314,
+            "mean_exposure": 0.616351572275917,
+            "final_value": 925964.1161328681
+          }
+        ]
+      },
+      {
+        "delta_threshold": 0.2,
+        "valid_3_of_3": true,
+        "mean_sharpe": -0.13770363752327672,
+        "std_sharpe": 0.07987433186408203,
+        "mean_return": -0.09534126176303903,
+        "mean_mdd": -0.32763854334826875,
+        "per_seed": [
+          {
+            "seed": 42,
+            "total_return": -0.12900334143161007,
+            "annual_volatility": 0.3139573393801891,
+            "max_drawdown": -0.43838483177175624,
+            "sharpe": -0.07252122226230334,
+            "trade_count": 23007,
+            "rejection_rate": 0.008264462809917356,
+            "mean_exposure": 0.9970655921185173,
+            "final_value": 870996.65856839
+          },
+          {
+            "seed": 2024,
+            "total_return": -0.07266069526226981,
+            "annual_volatility": 0.1337925824773942,
+            "max_drawdown": -0.21561569205490283,
+            "sharpe": -0.22680456508133895,
+            "trade_count": 96,
+            "rejection_rate": 0.9958677685950413,
+            "mean_exposure": 0.4567936270733633,
+            "final_value": 927339.3047377302
+          },
+          {
+            "seed": 2026,
+            "total_return": -0.0843597485952372,
+            "annual_volatility": 0.20998651172446275,
+            "max_drawdown": -0.3289151062181471,
+            "sharpe": -0.11378512522618783,
+            "trade_count": 11088,
+            "rejection_rate": 0.5227272727272727,
+            "mean_exposure": 0.6169163708644734,
+            "final_value": 915640.2514047629
+          }
+        ]
+      },
+      {
+        "delta_threshold": 0.22,
+        "valid_3_of_3": true,
+        "mean_sharpe": -0.07218778375894985,
+        "std_sharpe": 0.00980006976079309,
+        "mean_return": -0.0716867815062695,
+        "mean_mdd": -0.29747832661161194,
+        "per_seed": [
+          {
+            "seed": 42,
+            "total_return": -0.12783706804120276,
+            "annual_volatility": 0.3132588202587819,
+            "max_drawdown": -0.4370857932949408,
+            "sharpe": -0.07114853671689965,
+            "trade_count": 23051,
+            "rejection_rate": 0.006198347107438017,
+            "mean_exposure": 0.9970659471874308,
+            "final_value": 872162.9319587973
+          },
+          {
+            "seed": 2024,
+            "total_return": -0.014755766439936147,
+            "annual_volatility": 0.07654081177690483,
+            "max_drawdown": -0.13353136891923822,
+            "sharpe": -0.062948752582446,
+            "trade_count": 96,
+            "rejection_rate": 0.9958677685950413,
+            "mean_exposure": 0.25696433409289465,
+            "final_value": 985244.2335600639
+          },
+          {
+            "seed": 2026,
+            "total_return": -0.0724675100376696,
+            "annual_volatility": 0.20952674134420682,
+            "max_drawdown": -0.32181781762065687,
+            "sharpe": -0.08246606197750388,
+            "trade_count": 10752,
+            "rejection_rate": 0.5371900826446281,
+            "mean_exposure": 0.611212690898175,
+            "final_value": 927532.4899623304
+          }
+        ]
+      },
+      {
+        "delta_threshold": 0.24,
+        "valid_3_of_3": true,
+        "mean_sharpe": -0.12373334333580394,
+        "std_sharpe": 0.10248225348408693,
+        "mean_return": -0.08093635878013516,
+        "mean_mdd": -0.30070833107152706,
+        "per_seed": [
+          {
+            "seed": 42,
+            "total_return": -0.12767185734416786,
+            "annual_volatility": 0.31327489458994456,
+            "max_drawdown": -0.43710559974311647,
+            "sharpe": -0.07081491489122493,
+            "trade_count": 22953,
+            "rejection_rate": 0.010330578512396695,
+            "mean_exposure": 0.9970659446011692,
+            "final_value": 872328.1426558321
+          },
+          {
+            "seed": 2024,
+            "total_return": -0.014113401653783053,
+            "annual_volatility": 0.07653336783878903,
+            "max_drawdown": -0.13353136891923822,
+            "sharpe": -0.058528266651581604,
+            "trade_count": 96,
+            "rejection_rate": 0.9958677685950413,
+            "mean_exposure": 0.2564997227549407,
+            "final_value": 985886.598346217
+          },
+          {
+            "seed": 2026,
+            "total_return": -0.10102381734245458,
+            "annual_volatility": 0.16987632807099087,
+            "max_drawdown": -0.3314880245522265,
+            "sharpe": -0.24185684846460526,
+            "trade_count": 5184,
+            "rejection_rate": 0.7768595041322314,
+            "mean_exposure": 0.4830796745656103,
+            "final_value": 898976.1826575454
+          }
+        ]
+      },
+      {
+        "delta_threshold": 0.26,
+        "valid_3_of_3": true,
+        "mean_sharpe": -0.076797948737809,
+        "std_sharpe": 0.16671479732255268,
+        "mean_return": -0.07469310202420043,
+        "mean_mdd": -0.28721871219187095,
+        "per_seed": [
+          {
+            "seed": 42,
+            "total_return": -0.12776279225745124,
+            "annual_volatility": 0.3133062324001048,
+            "max_drawdown": -0.4371217646022928,
+            "sharpe": -0.07095284752810861,
+            "trade_count": 22908,
+            "rejection_rate": 0.012396694214876033,
+            "mean_exposure": 0.9970657591778092,
+            "final_value": 872237.2077425488
+          },
+          {
+            "seed": 2024,
+            "total_return": 0.005983235867141445,
+            "annual_volatility": 0.05019821832576665,
+            "max_drawdown": -0.09216471129009363,
+            "sharpe": 0.08691743073385756,
+            "trade_count": 48,
+            "rejection_rate": 0.9979338842975206,
+            "mean_exposure": 0.14874511093649995,
+            "final_value": 1005983.2358671415
+          },
+          {
+            "seed": 2026,
+            "total_return": -0.1022997496822915,
+            "annual_volatility": 0.1698154902364677,
+            "max_drawdown": -0.3323696606832265,
+            "sharpe": -0.24635842941917593,
+            "trade_count": 5136,
+            "rejection_rate": 0.7789256198347108,
+            "mean_exposure": 0.4825997821106045,
+            "final_value": 897700.2503177085
+          }
+        ]
+      },
+      {
+        "delta_threshold": 0.28,
+        "valid_3_of_3": true,
+        "mean_sharpe": -0.0978256452361838,
+        "std_sharpe": 0.19930705026730075,
+        "mean_return": -0.07381521197260336,
+        "mean_mdd": -0.27958979545503204,
+        "per_seed": [
+          {
+            "seed": 42,
+            "total_return": -0.12798389454885273,
+            "annual_volatility": 0.31333028873768554,
+            "max_drawdown": -0.43729555283364796,
+            "sharpe": -0.0713451861950796,
+            "trade_count": 22815,
+            "rejection_rate": 0.01652892561983471,
+            "mean_exposure": 0.9970660213793462,
+            "final_value": 872016.1054511473
+          },
+          {
+            "seed": 2024,
+            "total_return": 0.005983235867141445,
+            "annual_volatility": 0.05019821832576665,
+            "max_drawdown": -0.09216471129009363,
+            "sharpe": 0.08691743073385756,
+            "trade_count": 48,
+            "rejection_rate": 0.9979338842975206,
+            "mean_exposure": 0.14874511093649995,
+            "final_value": 1005983.2358671415
+          },
+          {
+            "seed": 2026,
+            "total_return": -0.0994449772360988,
+            "annual_volatility": 0.14337728872991018,
+            "max_drawdown": -0.30930912224135454,
+            "sharpe": -0.30904918024732936,
+            "trade_count": 5088,
+            "rejection_rate": 0.78099173553719,
+            "mean_exposure": 0.29255691178579446,
+            "final_value": 900555.0227639012
+          }
+        ]
+      },
+      {
+        "delta_threshold": 0.3,
+        "valid_3_of_3": false,
+        "mean_sharpe": null,
+        "std_sharpe": null,
+        "mean_return": -0.07603628345579778,
+        "mean_mdd": -0.24906190195928868,
+        "per_seed": [
+          {
+            "seed": 42,
+            "total_return": -0.12866387313129457,
+            "annual_volatility": 0.3134591068964153,
+            "max_drawdown": -0.4378765836365115,
+            "sharpe": -0.0724814017814786,
+            "trade_count": 22476,
+            "rejection_rate": 0.030991735537190084,
+            "mean_exposure": 0.9970658690108256,
+            "final_value": 871336.1268687054
+          },
+          {
+            "seed": 2024,
+            "total_return": 0.0,
+            "annual_volatility": 0.0,
+            "max_drawdown": 0.0,
+            "sharpe": null,
+            "trade_count": 0,
+            "rejection_rate": 1.0,
+            "mean_exposure": 0.0,
+            "final_value": 1000000.0
+          },
+          {
+            "seed": 2026,
+            "total_return": -0.0994449772360988,
+            "annual_volatility": 0.14337728872991018,
+            "max_drawdown": -0.30930912224135454,
+            "sharpe": -0.30904918024732936,
+            "trade_count": 5040,
+            "rejection_rate": 0.7830578512396694,
+            "mean_exposure": 0.29255691178579446,
+            "final_value": 900555.0227639012
+          }
+        ]
+      },
+      {
+        "delta_threshold": 0.32,
+        "valid_3_of_3": false,
+        "mean_sharpe": null,
+        "std_sharpe": null,
+        "mean_return": -0.05757768454410295,
+        "mean_mdd": -0.19714175999640327,
+        "per_seed": [
+          {
+            "seed": 42,
+            "total_return": -0.12866387313129457,
+            "annual_volatility": 0.3134591068964153,
+            "max_drawdown": -0.4378765836365115,
+            "sharpe": -0.0724814017814786,
+            "trade_count": 22332,
+            "rejection_rate": 0.0371900826446281,
+            "mean_exposure": 0.9970658690108256,
+            "final_value": 871336.1268687054
+          },
+          {
+            "seed": 2024,
+            "total_return": 0.0,
+            "annual_volatility": 0.0,
+            "max_drawdown": 0.0,
+            "sharpe": null,
+            "trade_count": 0,
+            "rejection_rate": 1.0,
+            "mean_exposure": 0.0,
+            "final_value": 1000000.0
+          },
+          {
+            "seed": 2026,
+            "total_return": -0.04406918050101427,
+            "annual_volatility": 0.06676864096839372,
+            "max_drawdown": -0.1535486963526983,
+            "sharpe": -0.3181363539673814,
+            "trade_count": 96,
+            "rejection_rate": 0.9958677685950413,
+            "mean_exposure": 0.1578821542783093,
+            "final_value": 955930.8194989858
+          }
+        ]
+      },
+      {
+        "delta_threshold": 0.34,
+        "valid_3_of_3": false,
+        "mean_sharpe": null,
+        "std_sharpe": null,
+        "mean_return": -0.05758879689617902,
+        "mean_mdd": -0.19712229013258523,
+        "per_seed": [
+          {
+            "seed": 42,
+            "total_return": -0.12869721018752278,
+            "annual_volatility": 0.31348457822644216,
+            "max_drawdown": -0.4378181740450574,
+            "sharpe": -0.07251674147480607,
+            "trade_count": 22197,
+            "rejection_rate": 0.04338842975206612,
+            "mean_exposure": 0.997066217970557,
+            "final_value": 871302.7898124772
+          },
+          {
+            "seed": 2024,
+            "total_return": 0.0,
+            "annual_volatility": 0.0,
+            "max_drawdown": 0.0,
+            "sharpe": null,
+            "trade_count": 0,
+            "rejection_rate": 1.0,
+            "mean_exposure": 0.0,
+            "final_value": 1000000.0
+          },
+          {
+            "seed": 2026,
+            "total_return": -0.04406918050101427,
+            "annual_volatility": 0.06676864096839372,
+            "max_drawdown": -0.1535486963526983,
+            "sharpe": -0.3181363539673814,
+            "trade_count": 96,
+            "rejection_rate": 0.9958677685950413,
+            "mean_exposure": 0.1578821542783093,
+            "final_value": 955930.8194989858
+          }
+        ]
+      },
+      {
+        "delta_threshold": 0.36,
+        "valid_3_of_3": false,
+        "mean_sharpe": null,
+        "std_sharpe": null,
+        "mean_return": -0.055328342087546,
+        "mean_mdd": -0.19486078131991605,
+        "per_seed": [
+          {
+            "seed": 42,
+            "total_return": -0.12861021812910645,
+            "annual_volatility": 0.3134648385157723,
+            "max_drawdown": -0.43761413792790615,
+            "sharpe": -0.07237454964051672,
+            "trade_count": 22007,
+            "rejection_rate": 0.05165289256198347,
+            "mean_exposure": 0.9970659797390681,
+            "final_value": 871389.7818708936
+          },
+          {
+            "seed": 2024,
+            "total_return": 0.0,
+            "annual_volatility": 0.0,
+            "max_drawdown": 0.0,
+            "sharpe": null,
+            "trade_count": 0,
+            "rejection_rate": 1.0,
+            "mean_exposure": 0.0,
+            "final_value": 1000000.0
+          },
+          {
+            "seed": 2026,
+            "total_return": -0.037374808133531556,
+            "annual_volatility": 0.06598523071980827,
+            "max_drawdown": -0.14696820603184202,
+            "sharpe": -0.2676406312476619,
+            "trade_count": 96,
+            "rejection_rate": 0.9958677685950413,
+            "mean_exposure": 0.15463942392672378,
+            "final_value": 962625.1918664684
+          }
+        ]
+      }
+    ]
+  },
+  "quantile_mean": {
+    "best": {
+      "delta_threshold": 0.2,
+      "valid_3_of_3": true,
+      "mean_sharpe": -0.06767681051815917,
+      "std_sharpe": 0.04871152503910838,
+      "mean_return": -0.073824663838575,
+      "mean_mdd": -0.3002771023030472,
+      "per_seed": [
+        {
+          "seed": 42,
+          "total_return": -0.12900334143161007,
+          "annual_volatility": 0.3139573393801891,
+          "max_drawdown": -0.43838483177175624,
+          "sharpe": -0.07252122226230334,
+          "trade_count": 23007,
+          "rejection_rate": 0.008264462809917356,
+          "mean_exposure": 0.9970655921185173,
+          "final_value": 870996.65856839
+        },
+        {
+          "seed": 2024,
+          "total_return": -0.00811090148887772,
+          "annual_volatility": 0.07695579819727415,
+          "max_drawdown": -0.13353136891923822,
+          "sharpe": -0.01672408406598636,
+          "trade_count": 96,
+          "rejection_rate": 0.9958677685950413,
+          "mean_exposure": 0.2571984398193036,
+          "final_value": 991889.0985111223
+        },
+        {
+          "seed": 2026,
+          "total_return": -0.0843597485952372,
+          "annual_volatility": 0.20998651172446275,
+          "max_drawdown": -0.3289151062181471,
+          "sharpe": -0.11378512522618783,
+          "trade_count": 10992,
+          "rejection_rate": 0.5268595041322314,
+          "mean_exposure": 0.6169163708644734,
+          "final_value": 915640.2514047629
+        }
+      ]
+    },
+    "rows": [
+      {
+        "delta_threshold": 0.14,
+        "valid_3_of_3": true,
+        "mean_sharpe": -0.12087658389823898,
+        "std_sharpe": 0.04373121114201875,
+        "mean_return": -0.14425178812930814,
+        "mean_mdd": -0.4261217252033264,
+        "per_seed": [
+          {
+            "seed": 42,
+            "total_return": -0.1289589872211847,
+            "annual_volatility": 0.3139523183331524,
+            "max_drawdown": -0.4383502084972648,
+            "sharpe": -0.07244294424686178,
+            "trade_count": 23105,
+            "rejection_rate": 0.004132231404958678,
+            "mean_exposure": 0.997065997629608,
+            "final_value": 871041.0127788153
+          },
+          {
+            "seed": 2024,
+            "total_return": -0.153470018150888,
+            "annual_volatility": 0.30472378482062623,
+            "max_drawdown": -0.4521612565902383,
+            "sharpe": -0.13272183387454184,
+            "trade_count": 22645,
+            "rejection_rate": 0.024793388429752067,
+            "mean_exposure": 0.9852702754209901,
+            "final_value": 846529.981849112
+          },
+          {
+            "seed": 2026,
+            "total_return": -0.15032635901585167,
+            "annual_volatility": 0.2838245389599867,
+            "max_drawdown": -0.3878537105224761,
+            "sharpe": -0.15746497357331335,
+            "trade_count": 20304,
+            "rejection_rate": 0.12603305785123967,
+            "mean_exposure": 0.9245265557365479,
+            "final_value": 849673.6409841484
+          }
+        ]
+      },
+      {
+        "delta_threshold": 0.16,
+        "valid_3_of_3": true,
+        "mean_sharpe": -0.11646306874664292,
+        "std_sharpe": 0.04147750396908321,
+        "mean_return": -0.14184077279569177,
+        "mean_mdd": -0.4262230717303015,
+        "per_seed": [
+          {
+            "seed": 42,
+            "total_return": -0.1289589872211847,
+            "annual_volatility": 0.3139523183331524,
+            "max_drawdown": -0.4383502084972648,
+            "sharpe": -0.07244294424686178,
+            "trade_count": 23105,
+            "rejection_rate": 0.004132231404958678,
+            "mean_exposure": 0.997065997629608,
+            "final_value": 871041.0127788153
+          },
+          {
+            "seed": 2024,
+            "total_return": -0.14768221643327617,
+            "annual_volatility": 0.30397014687745827,
+            "max_drawdown": -0.4522719832323634,
+            "sharpe": -0.12213131913942474,
+            "trade_count": 22454,
+            "rejection_rate": 0.03305785123966942,
+            "mean_exposure": 0.9813404062310069,
+            "final_value": 852317.7835667238
+          },
+          {
+            "seed": 2026,
+            "total_return": -0.14888111473261445,
+            "annual_volatility": 0.28352038840389243,
+            "max_drawdown": -0.3880470234612762,
+            "sharpe": -0.15481494285364222,
+            "trade_count": 20208,
+            "rejection_rate": 0.13016528925619836,
+            "mean_exposure": 0.9239925988918696,
+            "final_value": 851118.8852673855
+          }
+        ]
+      },
+      {
+        "delta_threshold": 0.18,
+        "valid_3_of_3": true,
+        "mean_sharpe": -0.10240338349171359,
+        "std_sharpe": 0.04100051073836947,
+        "mean_return": -0.11603616723199021,
+        "mean_mdd": -0.3880475730403867,
+        "per_seed": [
+          {
+            "seed": 42,
+            "total_return": -0.12900334143161007,
+            "annual_volatility": 0.3139573393801891,
+            "max_drawdown": -0.43838483177175624,
+            "sharpe": -0.07252122226230334,
+            "trade_count": 23007,
+            "rejection_rate": 0.008264462809917356,
+            "mean_exposure": 0.9970655921185173,
+            "final_value": 870996.65856839
+          },
+          {
+            "seed": 2024,
+            "total_return": -0.14506927639722866,
+            "annual_volatility": 0.2818122728415233,
+            "max_drawdown": -0.3971342825481443,
+            "sharpe": -0.14914594537697903,
+            "trade_count": 19766,
+            "rejection_rate": 0.1487603305785124,
+            "mean_exposure": 0.9270458904538905,
+            "final_value": 854930.7236027713
+          },
+          {
+            "seed": 2026,
+            "total_return": -0.07403588386713189,
+            "annual_volatility": 0.21031013870954438,
+            "max_drawdown": -0.3286236048012593,
+            "sharpe": -0.08554298283585843,
+            "trade_count": 11136,
+            "rejection_rate": 0.5206611570247934,
+            "mean_exposure": 0.616351572275917,
+            "final_value": 925964.1161328681
+          }
+        ]
+      },
+      {
+        "delta_threshold": 0.2,
+        "valid_3_of_3": true,
+        "mean_sharpe": -0.06767681051815917,
+        "std_sharpe": 0.04871152503910838,
+        "mean_return": -0.073824663838575,
+        "mean_mdd": -0.3002771023030472,
+        "per_seed": [
+          {
+            "seed": 42,
+            "total_return": -0.12900334143161007,
+            "annual_volatility": 0.3139573393801891,
+            "max_drawdown": -0.43838483177175624,
+            "sharpe": -0.07252122226230334,
+            "trade_count": 23007,
+            "rejection_rate": 0.008264462809917356,
+            "mean_exposure": 0.9970655921185173,
+            "final_value": 870996.65856839
+          },
+          {
+            "seed": 2024,
+            "total_return": -0.00811090148887772,
+            "annual_volatility": 0.07695579819727415,
+            "max_drawdown": -0.13353136891923822,
+            "sharpe": -0.01672408406598636,
+            "trade_count": 96,
+            "rejection_rate": 0.9958677685950413,
+            "mean_exposure": 0.2571984398193036,
+            "final_value": 991889.0985111223
+          },
+          {
+            "seed": 2026,
+            "total_return": -0.0843597485952372,
+            "annual_volatility": 0.20998651172446275,
+            "max_drawdown": -0.3289151062181471,
+            "sharpe": -0.11378512522618783,
+            "trade_count": 10992,
+            "rejection_rate": 0.5268595041322314,
+            "mean_exposure": 0.6169163708644734,
+            "final_value": 915640.2514047629
+          }
+        ]
+      },
+      {
+        "delta_threshold": 0.22,
+        "valid_3_of_3": true,
+        "mean_sharpe": -0.07579823000171071,
+        "std_sharpe": 0.015699517395789488,
+        "mean_return": -0.07299858023808925,
+        "mean_mdd": -0.29825171476108425,
+        "per_seed": [
+          {
+            "seed": 42,
+            "total_return": -0.12783706804120276,
+            "annual_volatility": 0.3132588202587819,
+            "max_drawdown": -0.4370857932949408,
+            "sharpe": -0.07114853671689965,
+            "trade_count": 23051,
+            "rejection_rate": 0.006198347107438017,
+            "mean_exposure": 0.9970659471874308,
+            "final_value": 872162.9319587973
+          },
+          {
+            "seed": 2024,
+            "total_return": -0.014755766439936147,
+            "annual_volatility": 0.07654081177690483,
+            "max_drawdown": -0.13353136891923822,
+            "sharpe": -0.062948752582446,
+            "trade_count": 96,
+            "rejection_rate": 0.9958677685950413,
+            "mean_exposure": 0.25696433409289465,
+            "final_value": 985244.2335600639
+          },
+          {
+            "seed": 2026,
+            "total_return": -0.07640290623312884,
+            "annual_volatility": 0.20934058556532778,
+            "max_drawdown": -0.32413798206907374,
+            "sharpe": -0.09329740070578646,
+            "trade_count": 10704,
+            "rejection_rate": 0.5392561983471075,
+            "mean_exposure": 0.6105990259506908,
+            "final_value": 923597.0937668711
+          }
+        ]
+      },
+      {
+        "delta_threshold": 0.24,
+        "valid_3_of_3": true,
+        "mean_sharpe": -0.10870947534819443,
+        "std_sharpe": 0.0762484827220488,
+        "mean_return": -0.0870221430556658,
+        "mean_mdd": -0.310981862094739,
+        "per_seed": [
+          {
+            "seed": 42,
+            "total_return": -0.12783706804120276,
+            "annual_volatility": 0.3132588202587819,
+            "max_drawdown": -0.4370857932949408,
+            "sharpe": -0.07114853671689965,
+            "trade_count": 23051,
+            "rejection_rate": 0.006198347107438017,
+            "mean_exposure": 0.9970659471874308,
+            "final_value": 872162.9319587973
+          },
+          {
+            "seed": 2024,
+            "total_return": -0.014113401653783053,
+            "annual_volatility": 0.07653336783878903,
+            "max_drawdown": -0.13353136891923822,
+            "sharpe": -0.058528266651581604,
+            "trade_count": 96,
+            "rejection_rate": 0.9958677685950413,
+            "mean_exposure": 0.2564997227549407,
+            "final_value": 985886.598346217
+          },
+          {
+            "seed": 2026,
+            "total_return": -0.11911595947201159,
+            "annual_volatility": 0.21677585088454968,
+            "max_drawdown": -0.36232842407003796,
+            "sharpe": -0.19645162267610206,
+            "trade_count": 11520,
+            "rejection_rate": 0.5041322314049587,
+            "mean_exposure": 0.6363246780405782,
+            "final_value": 880884.0405279885
+          }
+        ]
+      },
+      {
+        "delta_threshold": 0.26,
+        "valid_3_of_3": true,
+        "mean_sharpe": -0.07541542459232105,
+        "std_sharpe": 0.16442564251734196,
+        "mean_return": -0.07433349490892982,
+        "mean_mdd": -0.28696734878124414,
+        "per_seed": [
+          {
+            "seed": 42,
+            "total_return": -0.12795990325147633,
+            "annual_volatility": 0.3133241006207608,
+            "max_drawdown": -0.43724931050141236,
+            "sharpe": -0.07130685604621545,
+            "trade_count": 22961,
+            "rejection_rate": 0.010330578512396695,
+            "mean_exposure": 0.9970661989743081,
+            "final_value": 872040.0967485236
+          },
+          {
+            "seed": 2024,
+            "total_return": 0.005983235867141445,
+            "annual_volatility": 0.05019821832576665,
+            "max_drawdown": -0.09216471129009363,
+            "sharpe": 0.08691743073385756,
+            "trade_count": 48,
+            "rejection_rate": 0.9979338842975206,
+            "mean_exposure": 0.14874511093649995,
+            "final_value": 1005983.2358671415
+          },
+          {
+            "seed": 2026,
+            "total_return": -0.10102381734245458,
+            "annual_volatility": 0.16987632807099087,
+            "max_drawdown": -0.3314880245522265,
+            "sharpe": -0.24185684846460526,
+            "trade_count": 5136,
+            "rejection_rate": 0.7789256198347108,
+            "mean_exposure": 0.4830796745656103,
+            "final_value": 898976.1826575454
+          }
+        ]
+      },
+      {
+        "delta_threshold": 0.28,
+        "valid_3_of_3": true,
+        "mean_sharpe": -0.0978256452361838,
+        "std_sharpe": 0.19930705026730075,
+        "mean_return": -0.07381521197260336,
+        "mean_mdd": -0.27958979545503204,
+        "per_seed": [
+          {
+            "seed": 42,
+            "total_return": -0.12798389454885273,
+            "annual_volatility": 0.31333028873768554,
+            "max_drawdown": -0.43729555283364796,
+            "sharpe": -0.0713451861950796,
+            "trade_count": 22815,
+            "rejection_rate": 0.01652892561983471,
+            "mean_exposure": 0.9970660213793462,
+            "final_value": 872016.1054511473
+          },
+          {
+            "seed": 2024,
+            "total_return": 0.005983235867141445,
+            "annual_volatility": 0.05019821832576665,
+            "max_drawdown": -0.09216471129009363,
+            "sharpe": 0.08691743073385756,
+            "trade_count": 48,
+            "rejection_rate": 0.9979338842975206,
+            "mean_exposure": 0.14874511093649995,
+            "final_value": 1005983.2358671415
+          },
+          {
+            "seed": 2026,
+            "total_return": -0.0994449772360988,
+            "annual_volatility": 0.14337728872991018,
+            "max_drawdown": -0.30930912224135454,
+            "sharpe": -0.30904918024732936,
+            "trade_count": 5040,
+            "rejection_rate": 0.7830578512396694,
+            "mean_exposure": 0.29255691178579446,
+            "final_value": 900555.0227639012
+          }
+        ]
+      },
+      {
+        "delta_threshold": 0.3,
+        "valid_3_of_3": false,
+        "mean_sharpe": null,
+        "std_sharpe": null,
+        "mean_return": -0.07603628345579778,
+        "mean_mdd": -0.24906190195928868,
+        "per_seed": [
+          {
+            "seed": 42,
+            "total_return": -0.12866387313129457,
+            "annual_volatility": 0.3134591068964153,
+            "max_drawdown": -0.4378765836365115,
+            "sharpe": -0.0724814017814786,
+            "trade_count": 22572,
+            "rejection_rate": 0.026859504132231406,
+            "mean_exposure": 0.9970658690108256,
+            "final_value": 871336.1268687054
+          },
+          {
+            "seed": 2024,
+            "total_return": 0.0,
+            "annual_volatility": 0.0,
+            "max_drawdown": 0.0,
+            "sharpe": null,
+            "trade_count": 0,
+            "rejection_rate": 1.0,
+            "mean_exposure": 0.0,
+            "final_value": 1000000.0
+          },
+          {
+            "seed": 2026,
+            "total_return": -0.0994449772360988,
+            "annual_volatility": 0.14337728872991018,
+            "max_drawdown": -0.30930912224135454,
+            "sharpe": -0.30904918024732936,
+            "trade_count": 5040,
+            "rejection_rate": 0.7830578512396694,
+            "mean_exposure": 0.29255691178579446,
+            "final_value": 900555.0227639012
+          }
+        ]
+      },
+      {
+        "delta_threshold": 0.32,
+        "valid_3_of_3": false,
+        "mean_sharpe": null,
+        "std_sharpe": null,
+        "mean_return": -0.05757768454410295,
+        "mean_mdd": -0.19714175999640327,
+        "per_seed": [
+          {
+            "seed": 42,
+            "total_return": -0.12866387313129457,
+            "annual_volatility": 0.3134591068964153,
+            "max_drawdown": -0.4378765836365115,
+            "sharpe": -0.0724814017814786,
+            "trade_count": 22428,
+            "rejection_rate": 0.03305785123966942,
+            "mean_exposure": 0.9970658690108256,
+            "final_value": 871336.1268687054
+          },
+          {
+            "seed": 2024,
+            "total_return": 0.0,
+            "annual_volatility": 0.0,
+            "max_drawdown": 0.0,
+            "sharpe": null,
+            "trade_count": 0,
+            "rejection_rate": 1.0,
+            "mean_exposure": 0.0,
+            "final_value": 1000000.0
+          },
+          {
+            "seed": 2026,
+            "total_return": -0.04406918050101427,
+            "annual_volatility": 0.06676864096839372,
+            "max_drawdown": -0.1535486963526983,
+            "sharpe": -0.3181363539673814,
+            "trade_count": 96,
+            "rejection_rate": 0.9958677685950413,
+            "mean_exposure": 0.1578821542783093,
+            "final_value": 955930.8194989858
+          }
+        ]
+      },
+      {
+        "delta_threshold": 0.34,
+        "valid_3_of_3": false,
+        "mean_sharpe": null,
+        "std_sharpe": null,
+        "mean_return": -0.05528946872756002,
+        "mean_mdd": -0.1948706608484345,
+        "per_seed": [
+          {
+            "seed": 42,
+            "total_return": -0.1284935980491485,
+            "annual_volatility": 0.31345905205524044,
+            "max_drawdown": -0.4376437765134614,
+            "sharpe": -0.07215888285250799,
+            "trade_count": 22286,
+            "rejection_rate": 0.03925619834710744,
+            "mean_exposure": 0.9970661310748652,
+            "final_value": 871506.4019508515
+          },
+          {
+            "seed": 2024,
+            "total_return": 0.0,
+            "annual_volatility": 0.0,
+            "max_drawdown": 0.0,
+            "sharpe": null,
+            "trade_count": 0,
+            "rejection_rate": 1.0,
+            "mean_exposure": 0.0,
+            "final_value": 1000000.0
+          },
+          {
+            "seed": 2026,
+            "total_return": -0.037374808133531556,
+            "annual_volatility": 0.06598523071980827,
+            "max_drawdown": -0.14696820603184202,
+            "sharpe": -0.2676406312476619,
+            "trade_count": 96,
+            "rejection_rate": 0.9958677685950413,
+            "mean_exposure": 0.15463942392672378,
+            "final_value": 962625.1918664684
+          }
+        ]
+      },
+      {
+        "delta_threshold": 0.36,
+        "valid_3_of_3": false,
+        "mean_sharpe": null,
+        "std_sharpe": null,
+        "mean_return": -0.055328342087546,
+        "mean_mdd": -0.19486078131991605,
+        "per_seed": [
+          {
+            "seed": 42,
+            "total_return": -0.12861021812910645,
+            "annual_volatility": 0.3134648385157723,
+            "max_drawdown": -0.43761413792790615,
+            "sharpe": -0.07237454964051672,
+            "trade_count": 22103,
+            "rejection_rate": 0.047520661157024795,
+            "mean_exposure": 0.9970659797390681,
+            "final_value": 871389.7818708936
+          },
+          {
+            "seed": 2024,
+            "total_return": 0.0,
+            "annual_volatility": 0.0,
+            "max_drawdown": 0.0,
+            "sharpe": null,
+            "trade_count": 0,
+            "rejection_rate": 1.0,
+            "mean_exposure": 0.0,
+            "final_value": 1000000.0
+          },
+          {
+            "seed": 2026,
+            "total_return": -0.037374808133531556,
+            "annual_volatility": 0.06598523071980827,
+            "max_drawdown": -0.14696820603184202,
+            "sharpe": -0.2676406312476619,
+            "trade_count": 96,
+            "rejection_rate": 0.9958677685950413,
+            "mean_exposure": 0.15463942392672378,
+            "final_value": 962625.1918664684
+          }
+        ]
+      }
+    ]
+  }
+}

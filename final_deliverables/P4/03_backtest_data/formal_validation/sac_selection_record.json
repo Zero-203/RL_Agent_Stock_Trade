@@ -1,0 +1,159 @@
+{
+  "selection_rule_version": "p4_val_sharpe_v1",
+  "selection_status": "selected",
+  "generated_at_utc": "2026-11-26T06:27:54.716795+00:00",
+  "algorithm": "sac",
+  "split": "validation",
+  "required_seeds": [
+    42,
+    2024,
+    2026
+  ],
+  "tie_tolerance": 1e-09,
+  "data_sha256": "2a4d08b68780019f93a398169378a75fa048a5a59e28b99586a2bea829d8bf4d",
+  "environment_code_sha256": {
+    "finrl_environment": "78d0151edd4637299250e196b966d22715f2ebbfc335985606718d53c4b58d64",
+    "shared_environment": "1533394fc3ea7c295765df25b3782f676766537f6ec87922d681a19de6525ce9"
+  },
+  "threshold_implementation_sha256": "8b16ca4cc142f223781ffaccd92784f4288dcccce3a4e38645dc2d93be2d0d74",
+  "model_training_run_type": "main",
+  "model_sha256_by_seed": {
+    "42": "8e837678eb46a02ed9c2cea7a151b516531e05c128cba146398fd4a10f21aa63",
+    "2024": "d377e7b390a8fc1820489ea3021c5baee74a116567591d09cfb8e6efe01b49d5",
+    "2026": "35d6ac6ff4a76beae419d68d3a0dbaca88080576baa2ddae6da0561a1ee7493d"
+  },
+  "unthresholded_validation_baseline": {
+    "per_seed_sharpe": {
+      "42": -0.24460645403428016,
+      "2024": -0.10963638581766064,
+      "2026": -0.0936388988438696
+    },
+    "mean_sharpe": -0.14929391289860347
+  },
+  "selected": {
+    "threshold_condition_id": "critic-6353b330fe50",
+    "threshold_condition_sha256": "6353b330fe50f7096d0160ef10b0036d033a76d01c00921baefc85a6a1dfe68f",
+    "threshold_config": {
+      "delta_threshold": 0.0,
+      "rule": "critic_delta_v1",
+      "summary": "min_q"
+    },
+    "mean_sharpe": -0.14929391289860347,
+    "std_sharpe": 0.08292973092126973,
+    "mean_vector_rejection_rate": 0.02892561983471074,
+    "selection_reason": "unique_highest_validation_mean_sharpe",
+    "tied_candidate_ids": [
+      "critic-6353b330fe50"
+    ]
+  },
+  "candidates": [
+    {
+      "threshold_condition_id": "critic-6353b330fe50",
+      "threshold_condition_sha256": "6353b330fe50f7096d0160ef10b0036d033a76d01c00921baefc85a6a1dfe68f",
+      "threshold_config": {
+        "delta_threshold": 0.0,
+        "rule": "critic_delta_v1",
+        "summary": "min_q"
+      },
+      "summary": "min_q",
+      "delta_threshold": 0.0,
+      "eligible": true,
+      "ineligible_reason": null,
+      "per_seed_sharpe": {
+        "42": -0.24460645403428016,
+        "2024": -0.10963638581766064,
+        "2026": -0.0936388988438696
+      },
+      "mean_sharpe": -0.14929391289860347,
+      "std_sharpe": 0.08292973092126973,
+      "mean_total_return": -0.1392150599489728,
+      "mean_vector_rejection_rate": 0.02892561983471074,
+      "manifests": {
+        "42": "C:\\Users\\Haoyu Fan\\PycharmProjects\\FinRL\\RL_Agent_Stock_Trade\\results\\backtest\\p4_formal_validation\\sac_s42_validation_critic-6353b330fe50_a05ff0\\run_manifest.json",
+        "2024": "C:\\Users\\Haoyu Fan\\PycharmProjects\\FinRL\\RL_Agent_Stock_Trade\\results\\backtest\\p4_formal_validation\\sac_s2024_validation_critic-6353b330fe50_f0ba8b\\run_manifest.json",
+        "2026": "C:\\Users\\Haoyu Fan\\PycharmProjects\\FinRL\\RL_Agent_Stock_Trade\\results\\backtest\\p4_formal_validation\\sac_s2026_validation_critic-6353b330fe50_96cae3\\run_manifest.json"
+      }
+    },
+    {
+      "threshold_condition_id": "critic-7075aded212a",
+      "threshold_condition_sha256": "7075aded212ac16cd4c6a46963afbce8d332bbc69c53ff977a413f5254b68b93",
+      "threshold_config": {
+        "delta_threshold": 0.11,
+        "rule": "critic_delta_v1",
+        "summary": "min_q"
+      },
+      "summary": "min_q",
+      "delta_threshold": 0.11,
+      "eligible": false,
+      "ineligible_reason": "null_or_nonfinite_sharpe_on_seeds=[42]",
+      "per_seed_sharpe": {
+        "42": null,
+        "2024": -0.10963638581766064,
+        "2026": -0.09886265698257989
+      },
+      "mean_sharpe": null,
+      "std_sharpe": null,
+      "mean_total_return": -0.09580103944820657,
+      "mean_vector_rejection_rate": 0.3650137741046832,
+      "manifests": {
+        "42": "C:\\Users\\Haoyu Fan\\PycharmProjects\\FinRL\\RL_Agent_Stock_Trade\\results\\backtest\\p4_formal_validation\\sac_s42_validation_critic-7075aded212a_dec9b2\\run_manifest.json",
+        "2024": "C:\\Users\\Haoyu Fan\\PycharmProjects\\FinRL\\RL_Agent_Stock_Trade\\results\\backtest\\p4_formal_validation\\sac_s2024_validation_critic-7075aded212a_1dcffe\\run_manifest.json",
+        "2026": "C:\\Users\\Haoyu Fan\\PycharmProjects\\FinRL\\RL_Agent_Stock_Trade\\results\\backtest\\p4_formal_validation\\sac_s2026_validation_critic-7075aded212a_3c3917\\run_manifest.json"
+      }
+    },
+    {
+      "threshold_condition_id": "critic-2c5ee80b07a7",
+      "threshold_condition_sha256": "2c5ee80b07a7bc8e5fd7e39eafba189266648c43eaad4547b6b793a58e78c965",
+      "threshold_config": {
+        "delta_threshold": 0.26,
+        "rule": "critic_delta_v1",
+        "summary": "min_q"
+      },
+      "summary": "min_q",
+      "delta_threshold": 0.26,
+      "eligible": false,
+      "ineligible_reason": "null_or_nonfinite_sharpe_on_seeds=[42, 2024, 2026]",
+      "per_seed_sharpe": {
+        "42": null,
+        "2024": null,
+        "2026": null
+      },
+      "mean_sharpe": null,
+      "std_sharpe": null,
+      "mean_total_return": 0.0,
+      "mean_vector_rejection_rate": 1.0,
+      "manifests": {
+        "42": "C:\\Users\\Haoyu Fan\\PycharmProjects\\FinRL\\RL_Agent_Stock_Trade\\results\\backtest\\p4_formal_validation\\sac_s42_validation_critic-2c5ee80b07a7_fb27b5\\run_manifest.json",
+        "2024": "C:\\Users\\Haoyu Fan\\PycharmProjects\\FinRL\\RL_Agent_Stock_Trade\\results\\backtest\\p4_formal_validation\\sac_s2024_validation_critic-2c5ee80b07a7_69a7a2\\run_manifest.json",
+        "2026": "C:\\Users\\Haoyu Fan\\PycharmProjects\\FinRL\\RL_Agent_Stock_Trade\\results\\backtest\\p4_formal_validation\\sac_s2026_validation_critic-2c5ee80b07a7_4758ae\\run_manifest.json"
+      }
+    },
+    {
+      "threshold_condition_id": "critic-c9341bb293dd",
+      "threshold_condition_sha256": "c9341bb293ddeca3d1d8b7ecb6e74f608eb68d8c545f6a5260e8bfc14c235469",
+      "threshold_config": {
+        "delta_threshold": 0.34,
+        "rule": "critic_delta_v1",
+        "summary": "min_q"
+      },
+      "summary": "min_q",
+      "delta_threshold": 0.34,
+      "eligible": false,
+      "ineligible_reason": "null_or_nonfinite_sharpe_on_seeds=[42, 2024, 2026]",
+      "per_seed_sharpe": {
+        "42": null,
+        "2024": null,
+        "2026": null
+      },
+      "mean_sharpe": null,
+      "std_sharpe": null,
+      "mean_total_return": 0.0,
+      "mean_vector_rejection_rate": 1.0,
+      "manifests": {
+        "42": "C:\\Users\\Haoyu Fan\\PycharmProjects\\FinRL\\RL_Agent_Stock_Trade\\results\\backtest\\p4_formal_validation\\sac_s42_validation_critic-c9341bb293dd_d8594f\\run_manifest.json",
+        "2024": "C:\\Users\\Haoyu Fan\\PycharmProjects\\FinRL\\RL_Agent_Stock_Trade\\results\\backtest\\p4_formal_validation\\sac_s2024_validation_critic-c9341bb293dd_264e5f\\run_manifest.json",
+        "2026": "C:\\Users\\Haoyu Fan\\PycharmProjects\\FinRL\\RL_Agent_Stock_Trade\\results\\backtest\\p4_formal_validation\\sac_s2026_validation_critic-c9341bb293dd_9dff67\\run_manifest.json"
+      }
+    }
+  ]
+}

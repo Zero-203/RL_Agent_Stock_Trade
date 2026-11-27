@@ -180,4 +180,5 @@ poetry.lock
 !docs/source/image/*.PNG
 !figs/*.png
 !figs/*.PNG
+!final_deliverables/**
 /.github/copilot-instructions.md

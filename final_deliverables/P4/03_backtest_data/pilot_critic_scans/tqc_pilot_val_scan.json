@@ -1,0 +1,29 @@
+{
+  "algorithm": "tqc",
+  "rule": "critic_delta_v1",
+  "summary": "truncated_quantile_mean",
+  "observations": 484,
+  "delta_min": -1.0687618255615234,
+  "delta_mean": 1.7092477563491537,
+  "delta_std": 0.7529251422767382,
+  "delta_max": 7.31513524055481,
+  "positive_delta_fraction": 0.9628099173553719,
+  "quantiles": {
+    "p10": 0.797490692138672,
+    "p25": 1.405263900756836,
+    "p50": 1.8685836791992188,
+    "p75": 2.1021580696105957,
+    "p90": 2.321840286254883
+  },
+  "suggested_candidates": [
+    0.0,
+    1.405264,
+    1.868584,
+    2.102158
+  ],
+  "model_path": "C:\\Users\\Haoyu Fan\\PycharmProjects\\FinRL\\RL_Agent_Stock_Trade\\trained_models\\sse48_baostock_v2\\tqc\\tqc_s42_t20k_lr0p0003_b256_buf100k_start1000_entauto0p1.zip",
+  "data_path": "C:\\Users\\Haoyu Fan\\PycharmProjects\\FinRL\\RL_Agent_Stock_Trade\\datasets\\sse48_baostock_v2\\val_data.csv",
+  "model_run_type": "pilot",
+  "seed": 42,
+  "daily_csv": "C:\\Users\\Haoyu Fan\\PycharmProjects\\FinRL\\RL_Agent_Stock_Trade\\results\\p4_diagnostics\\tqc_pilot_val_scan_daily.csv"
+}

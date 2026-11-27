@@ -1,0 +1,47 @@
+{
+  "strategy": {
+    "observations": 485,
+    "return_intervals": 484,
+    "initial_value": 1000000.0,
+    "final_value": 836369.3167683191,
+    "total_return": -0.16363068323168084,
+    "annual_return": -0.08883778706362554,
+    "annual_volatility": 0.31050982870198385,
+    "max_drawdown": -0.45937424329529497,
+    "sharpe": -0.14481082453710264,
+    "risk_free_rate": 0.0,
+    "annualization": 252,
+    "cumulative_cost": 999.0003275997769,
+    "trade_count": 69,
+    "mean_gross_exposure": 0.9857703792761384,
+    "gross_turnover": 0.9990003275997763,
+    "threshold_asset_rejection_rate": 0.012396694214876033,
+    "threshold_vector_rejection_rate": 0.012396694214876033
+  },
+  "market_index": {
+    "observations": 485,
+    "return_intervals": 484,
+    "initial_value": 1000000.0,
+    "final_value": 723301.8363931836,
+    "total_return": -0.2766981636068164,
+    "annual_return": -0.15520144301671057,
+    "annual_volatility": 0.20107726776662518,
+    "max_drawdown": -0.43008379560092025,
+    "sharpe": -0.7380227973766726,
+    "risk_free_rate": 0.0,
+    "annualization": 252
+  },
+  "equal_weight": {
+    "observations": 485,
+    "return_intervals": 484,
+    "initial_value": 1000000.0,
+    "final_value": 1025374.3914312203,
+    "total_return": 0.025374391431220333,
+    "annual_return": 0.013132104735435288,
+    "annual_volatility": 0.17156721037997316,
+    "max_drawdown": -0.21972179963411642,
+    "sharpe": 0.1617636617041818,
+    "risk_free_rate": 0.0,
+    "annualization": 252
+  }
+}

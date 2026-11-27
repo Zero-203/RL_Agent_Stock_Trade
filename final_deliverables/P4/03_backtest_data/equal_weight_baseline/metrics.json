@@ -1,0 +1,37 @@
+{
+  "equal_weight": {
+    "observations": 485,
+    "return_intervals": 484,
+    "initial_value": 1000000.0,
+    "final_value": 1025374.3914312203,
+    "total_return": 0.025374391431220333,
+    "annual_return": 0.013132104735435288,
+    "annual_volatility": 0.17156721037997316,
+    "max_drawdown": -0.21972179963411642,
+    "sharpe": 0.1617636617041818,
+    "risk_free_rate": 0.0,
+    "annualization": 252,
+    "cumulative_cost": 997.0898573396545,
+    "trade_count": 48,
+    "mean_gross_exposure": 0.9961065418927313,
+    "gross_turnover": 0.9970898573396546,
+    "residual_cash_weight_final": 0.0018657115088817184,
+    "allocated_stock_count": 48,
+    "never_allocated_tickers": [],
+    "first_day_suspended_tickers": [],
+    "residual_uninvested_cash_final": 1913.0528030058158
+  },
+  "market_index": {
+    "observations": 485,
+    "return_intervals": 484,
+    "initial_value": 1000000.0,
+    "final_value": 723301.8363931836,
+    "total_return": -0.2766981636068164,
+    "annual_return": -0.15520144301671057,
+    "annual_volatility": 0.20107726776662518,
+    "max_drawdown": -0.43008379560092025,
+    "sharpe": -0.7380227973766726,
+    "risk_free_rate": 0.0,
+    "annualization": 252
+  }
+}
